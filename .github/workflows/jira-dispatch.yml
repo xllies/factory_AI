@@ -1,0 +1,113 @@
+name: Handle Jira Manual Trigger
+
+on:
+  repository_dispatch:
+    types: [jira_manual_button]
+  workflow_dispatch:
+    inputs:
+      issue_key:
+        description: "Jira issue key (e.g., TDS-7) for manual run"
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: tdf-dispatch-${{ github.event.client_payload.issue_key || github.event.inputs.issue_key }}
+  cancel-in-progress: false
+
+jobs:
+  handle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ISSUE_KEY: ${{ github.event.client_payload.issue_key || github.event.inputs.issue_key }}
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GH_PR_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Prepare ticket context
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        run: node .github/scripts/jira-dispatch.mjs prepare-dispatch
+
+      - name: Restore Claude session cache
+        if: env.SHOULD_RUN == 'true'
+        id: cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.claude/projects
+          key: tdf-claude-${{ env.ISSUE_KEY }}-${{ github.run_id }}
+          restore-keys: |
+            tdf-claude-${{ env.ISSUE_KEY }}-
+
+      - name: Show cache restore result
+        if: env.SHOULD_RUN == 'true'
+        run: |
+          echo "cache-hit: ${{ steps.cache-restore.outputs.cache-hit }}"
+          echo "matched-key: ${{ steps.cache-restore.outputs.cache-matched-key }}"
+          ls -la "$HOME/.claude/projects" || true
+
+      - name: Run Claude Code
+        if: env.SHOULD_RUN == 'true'
+        id: claude
+        uses: anthropics/claude-code-base-action@main
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          settings: |
+            { "model": "opus", "effortLevel": "high" }
+          prompt_file: ${{ env.PROMPT_FILE }}
+          claude_args: ${{ env.CLAUDE_ARGS }}
+
+      - name: Record run outputs
+        if: env.SHOULD_RUN == 'true'
+        env:
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          ACTION_SESSION_ID: ${{ steps.claude.outputs.session_id }}
+          CONCLUSION: ${{ steps.claude.outputs.conclusion }}
+          EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: node .github/scripts/jira-dispatch.mjs record-run
+
+      - name: Save Claude session cache
+        if: env.SHOULD_RUN == 'true' && env.NEW_SESSION_ID != ''
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.claude/projects
+          key: tdf-claude-${{ env.ISSUE_KEY }}-${{ github.run_id }}
+
+      - name: Commit changes
+        if: env.SHOULD_RUN == 'true'
+        env:
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: node .github/scripts/jira-dispatch.mjs commit-changes
+
+      - name: Ensure pull request (PR mode)
+        if: env.SHOULD_RUN == 'true' && env.KIND == 'pr'
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GH_TOKEN: ${{ secrets.GH_PR_TOKEN }}
+        run: node .github/scripts/jira-dispatch.mjs ensure-pr
+
+      - name: Comment back on Jira
+        if: env.SHOULD_RUN == 'true'
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        run: node .github/scripts/jira-dispatch.mjs comment-result

@@ -1,0 +1,63 @@
+name: Deploy on merge (local Supabase + ngrok)
+
+on:
+  push:
+    branches: [main]
+    paths: ["clients/**/backend/**"]
+
+permissions:
+  contents: write
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      deliveries: ${{ steps.detect.outputs.deliveries }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 2 }
+      - id: detect
+        run: |
+          set -euo pipefail
+          changed=$(git diff --name-only HEAD^ HEAD || true)
+          deliveries=$(echo "$changed" \
+            | awk -F/ '/^clients\/[^/]+\/[^/]+\/backend\// { print $2 "/" $3 }' \
+            | sort -u | jq -R . | jq -s -c .)
+          echo "deliveries=$deliveries" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: detect
+    if: needs.detect.outputs.deliveries != '[]' && needs.detect.outputs.deliveries != ''
+    runs-on: [self-hosted, dark-factory]
+    strategy:
+      fail-fast: false
+      matrix:
+        delivery: ${{ fromJSON(needs.detect.outputs.deliveries) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: supabase up + migrate
+        env:
+          NGROK_AUTHTOKEN: ${{ secrets.NGROK_AUTHTOKEN }}
+        run: |
+          set -euo pipefail
+          dir="clients/${{ matrix.delivery }}/backend"
+          cd "$dir"
+          supabase status >/dev/null 2>&1 || supabase start
+          supabase migration up
+          supabase functions deploy --no-verify-jwt || true
+          if ! pgrep -f "ngrok http 54321" > /dev/null; then
+            nohup ngrok http 54321 --log=stdout > "$RUNNER_TEMP/ngrok-${{ matrix.delivery }}.log" 2>&1 &
+            sleep 3
+          fi
+          live=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')
+          jq --arg url "$live" '. + {live_url:$url}' .delivery.json > .delivery.json.tmp
+          mv .delivery.json.tmp .delivery.json
+      - name: Commit live URL
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "clients/${{ matrix.delivery }}/backend/.delivery.json"
+          if ! git diff --cached --quiet; then
+            git commit -m "deploy(${{ matrix.delivery }}): refresh live_url"
+            git push origin HEAD:main
+          fi
