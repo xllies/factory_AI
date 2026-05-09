@@ -7,6 +7,7 @@ import type { ClassifyResult, Entry } from "@/lib/types";
 import { createEntry, fetchEntries, getTimezone } from "@/lib/client-store";
 import { ensureNotificationPermission, scheduleReminder } from "@/lib/reminders";
 import { relativeLabel } from "@/lib/datetime";
+import { addEntryToPreferredCalendar } from "@/lib/google-calendar-push";
 
 type CaptureState = "idle" | "recording" | "processing" | "done" | "error";
 
@@ -324,12 +325,17 @@ export default function CapturePage() {
             )}
 
             {result.dueAt && result.entryId && result.type !== "shopping" && (
-              <a
+              <button
+                type="button"
                 className="result-cal-link"
-                href={`/api/calendar/event/${result.entryId}.ics`}
+                style={{ background: "none", border: "none", cursor: "pointer", padding: 0, font: "inherit", color: "inherit", textAlign: "left", textDecoration: "underline" }}
+                onClick={() => void addEntryToPreferredCalendar(
+                  result.entryId!,
+                  `/api/calendar/event/${result.entryId}.ics`,
+                )}
               >
                 📅 Add to calendar
-              </a>
+              </button>
             )}
           </div>
         )}

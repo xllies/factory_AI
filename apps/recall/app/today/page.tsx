@@ -6,6 +6,7 @@ import type { Entry } from "@/lib/types";
 import { fetchEntries, updateEntry, deleteEntry } from "@/lib/client-store";
 import { bucketForDue, relativeLabel } from "@/lib/datetime";
 import { ensureNotificationPermission, scheduleAll, cancelAll } from "@/lib/reminders";
+import { addEntryToPreferredCalendar } from "@/lib/google-calendar-push";
 
 interface BucketedEntries {
   overdue: Entry[];
@@ -228,13 +229,15 @@ function ActionRow({ entry, onToggle, onDelete }: { entry: Entry; onToggle: (e: 
       </div>
       <div className="action-side">
         {entry.dueAt && (
-          <a
+          <button
+            type="button"
             className="ghost"
-            href={`/api/calendar/event/${entry.id}.ics`}
-            title="Download calendar event"
+            title="Add to calendar (Google or .ics file)"
+            onClick={() =>
+              void addEntryToPreferredCalendar(entry.id, `/api/calendar/event/${entry.id}.ics`)}
           >
             📅
-          </a>
+          </button>
         )}
         <button className="ghost" onClick={() => onDelete(entry.id)} title="Delete">
           ✕

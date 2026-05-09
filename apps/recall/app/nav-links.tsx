@@ -23,7 +23,7 @@ export default function NavLinks() {
           {l.label}
         </Link>
       ))}
-      <form action="/auth/signout" method="post" style={{ display: "inline" }}>
+      <form action="/auth/signout" method="post" style={{ display: "contents" }}>
         <button type="submit" className="nav-signout" title="Sign out">
           Sign out
         </button>

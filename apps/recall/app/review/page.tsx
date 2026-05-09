@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { Entry } from "@/lib/types";
 import { fetchEntries, updateEntry, deleteEntry } from "@/lib/client-store";
 import { relativeLabel } from "@/lib/datetime";
+import { addEntryToPreferredCalendar } from "@/lib/google-calendar-push";
 
 function formatDate(iso: string) {
   const d = new Date(iso);
@@ -132,13 +133,15 @@ export default function ReviewPage() {
                     {showRaw[entry.id] ? "Hide original" : "Show original"}
                   </button>
                   {entry.dueAt && (
-                    <a
+                    <button
+                      type="button"
                       className="ghost"
                       style={{ fontSize: "0.75rem", padding: "0.2rem 0.55rem" }}
-                      href={`/api/calendar/event/${entry.id}.ics`}
+                      onClick={() =>
+                        void addEntryToPreferredCalendar(entry.id, `/api/calendar/event/${entry.id}.ics`)}
                     >
-                      📅 .ics
-                    </a>
+                      📅 Calendar
+                    </button>
                   )}
                 </div>
                 <button
