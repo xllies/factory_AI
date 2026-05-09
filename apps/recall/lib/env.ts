@@ -15,6 +15,9 @@ const schema = z.object({
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1).optional(),
   /** Public URL of the app (no trailing slash). Fixes calendar feed links when `Host` / reverse-proxy URL ≠ the URL pasted into Google Calendar. */
   APP_BASE_URL: z.string().url().optional(),
+  /** Google Calendar OAuth (Web application) — Calendar API inserts. */
+  GOOGLE_CALENDAR_CLIENT_ID: z.string().min(1).optional(),
+  GOOGLE_CALENDAR_CLIENT_SECRET: z.string().min(1).optional(),
 });
 
 export const env = schema.parse({
@@ -24,4 +27,6 @@ export const env = schema.parse({
   NEXT_PUBLIC_SUPABASE_ANON_KEY: empty(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
   SUPABASE_SERVICE_ROLE_KEY: empty(process.env.SUPABASE_SERVICE_ROLE_KEY),
   APP_BASE_URL: empty(process.env.APP_BASE_URL),
+  GOOGLE_CALENDAR_CLIENT_ID: empty(process.env.GOOGLE_CALENDAR_CLIENT_ID),
+  GOOGLE_CALENDAR_CLIENT_SECRET: empty(process.env.GOOGLE_CALENDAR_CLIENT_SECRET),
 });
