@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import type { Entry } from "@/lib/types";
 import { fetchEntries, updateEntry, deleteEntry } from "@/lib/client-store";
 import { relativeLabel } from "@/lib/datetime";
@@ -11,7 +12,20 @@ function formatDate(iso: string) {
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
 }
 
-type Tab = "all" | "memory" | "action";
+type Tab = "all" | "memory" | "action" | "shopping";
+
+const TAB_LABELS: Record<Tab, string> = {
+  all: "All",
+  memory: "📌 Memories",
+  action: "✅ Actions",
+  shopping: "🛍️ Shopping",
+};
+
+const BADGE_LABELS: Record<string, string> = {
+  memory: "📌 Memory",
+  action: "✅ Action",
+  shopping: "🛍️ Shopping",
+};
 
 export default function ReviewPage() {
   const [entries, setEntries] = useState<Entry[]>([]);
@@ -46,6 +60,11 @@ export default function ReviewPage() {
   const filtered = entries.filter((e) => tab === "all" || e.type === tab);
   const memCount = entries.filter((e) => e.type === "memory").length;
   const actionCount = entries.filter((e) => e.type === "action").length;
+  const shopCount = entries.filter((e) => e.type === "shopping").length;
+
+  const EMPTY_ICON: Record<Tab, string> = {
+    all: "📋", memory: "📌", action: "✅", shopping: "🛍️",
+  };
 
   return (
     <main className="review-main">
@@ -54,25 +73,30 @@ export default function ReviewPage() {
         <p style={{ fontSize: "0.9rem", color: "var(--text-soft)", marginTop: "0.4rem" }}>
           {loading
             ? "Loading…"
-            : `${entries.length} total · ${memCount} memories · ${actionCount} actions`}
+            : [
+                `${entries.length} total`,
+                memCount ? `${memCount} memories` : null,
+                actionCount ? `${actionCount} actions` : null,
+                shopCount ? `${shopCount} shopping` : null,
+              ].filter(Boolean).join(" · ")}
         </p>
       </div>
 
       <div className="review-tabs">
-        {(["all", "memory", "action"] as Tab[]).map((t) => (
+        {(["all", "memory", "action", "shopping"] as Tab[]).map((t) => (
           <button key={t} className={`review-tab ${tab === t ? "active" : ""}`} onClick={() => setTab(t)}>
-            {t === "all" ? "All" : t === "memory" ? "📌 Memories" : "✅ Actions"}
+            {TAB_LABELS[t]}
           </button>
         ))}
       </div>
 
       {filtered.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">{tab === "action" ? "✅" : "📌"}</div>
+          <div className="empty-state-icon">{EMPTY_ICON[tab]}</div>
           <p>
             {entries.length === 0
               ? "Nothing captured yet. Head to Capture to get started."
-              : `No ${tab === "all" ? "entries" : tab + "s"} yet.`}
+              : `No ${tab === "all" ? "entries" : tab + (tab === "shopping" ? " entries" : "s")} yet.`}
           </p>
         </div>
       ) : (
@@ -84,7 +108,7 @@ export default function ReviewPage() {
             >
               <div className="entry-header">
                 <span className={`entry-badge ${entry.type}`}>
-                  {entry.type === "memory" ? "📌 Memory" : "✅ Action"}
+                  {BADGE_LABELS[entry.type] ?? entry.type}
                 </span>
                 <span className="entry-date">{formatDate(entry.createdAt)}</span>
               </div>
@@ -125,6 +149,15 @@ export default function ReviewPage() {
                       Done
                     </label>
                   )}
+                  {entry.type === "shopping" && (
+                    <Link
+                      className="ghost"
+                      style={{ fontSize: "0.75rem", padding: "0.2rem 0.55rem" }}
+                      href={`/shopping?q=${encodeURIComponent(entry.raw)}`}
+                    >
+                      🔍 Find products
+                    </Link>
+                  )}
                   <button
                     className="ghost"
                     style={{ fontSize: "0.75rem", padding: "0.2rem 0.55rem" }}
@@ -132,7 +165,7 @@ export default function ReviewPage() {
                   >
                     {showRaw[entry.id] ? "Hide original" : "Show original"}
                   </button>
-                  {entry.dueAt && (
+                  {entry.dueAt && entry.type !== "shopping" && (
                     <button
                       type="button"
                       className="ghost"

@@ -14,10 +14,15 @@
   --memory-bg: rgba(124 111 255 / 0.12);
   --action: #3ecf8e;
   --action-bg: rgba(62 207 142 / 0.12);
+  --shopping: #f5a623;
+  --shopping-bg: rgba(245 166 35 / 0.12);
   --danger: #ff6b8a;
   --radius: 16px;
   --shopping-ribbon: linear-gradient(120deg, rgba(108 127 255 / 0.14), rgba(124 111 255 / 0.08));
   --shopping-glow: 0 0 0 1px rgba(108 127 255 / 0.12), 0 16px 48px rgba(0 0 0 / 0.35);
+  --paper: #141d35;
+  --muted: rgba(255 255 255 / 0.12);
+  --muted-text: #8896c8;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -328,6 +333,11 @@ button.danger {
   border-color: rgba(62 207 142 / 0.3);
 }
 
+.result-card.shopping {
+  background: var(--shopping-bg);
+  border-color: rgba(245 166 35 / 0.3);
+}
+
 @keyframes slide-up {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0);    }
@@ -415,8 +425,9 @@ button.danger {
   animation: fade-in 0.2s ease;
 }
 
-.recent-item.memory { border-left: 3px solid rgba(124 111 255 / 0.5); }
-.recent-item.action { border-left: 3px solid rgba(62 207 142 / 0.5); }
+.recent-item.memory   { border-left: 3px solid rgba(124 111 255 / 0.5); }
+.recent-item.action   { border-left: 3px solid rgba(62 207 142 / 0.5); }
+.recent-item.shopping { border-left: 3px solid rgba(245 166 35 / 0.5); }
 
 .recent-icon { flex-shrink: 0; font-size: 0.9rem; }
 .recent-summary { color: var(--text-soft); line-height: 1.4; }
@@ -532,8 +543,9 @@ button.danger {
   animation: fade-in 0.2s ease;
 }
 
-.entry-card.memory { border-left: 3px solid rgba(124 111 255 / 0.6); }
-.entry-card.action { border-left: 3px solid rgba(62 207 142 / 0.6); }
+.entry-card.memory   { border-left: 3px solid rgba(124 111 255 / 0.6); }
+.entry-card.action   { border-left: 3px solid rgba(62 207 142 / 0.6); }
+.entry-card.shopping { border-left: 3px solid rgba(245 166 35 / 0.6); }
 .entry-card.done-card { opacity: 0.45; }
 
 .entry-header {
@@ -560,6 +572,11 @@ button.danger {
 .entry-badge.action {
   background: var(--action-bg);
   color: var(--action);
+}
+
+.entry-badge.shopping {
+  background: var(--shopping-bg);
+  color: var(--shopping);
 }
 
 .entry-date {

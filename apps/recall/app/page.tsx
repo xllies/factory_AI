@@ -44,28 +44,15 @@ export default function CapturePage() {
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
   const transcriptRef = useRef("");
 
-  useEffect(() => {
-    void (async () => {
-      const fresh = await fetchEntries();
-      setRecentEntries(fresh.slice(0, 5));
-    })();
+  type SpeechRecCtor = new () => SpeechRecognitionLike;
+  const SpeechRecCtorRef = useRef<SpeechRecCtor | null>(null);
 
-    const w = window as unknown as {
-      SpeechRecognition?: new () => SpeechRecognitionLike;
-      webkitSpeechRecognition?: new () => SpeechRecognitionLike;
-    };
-    const SpeechRec = w.SpeechRecognition ?? w.webkitSpeechRecognition;
-
-    if (!SpeechRec) {
-      setTextMode(true);
-      return;
-    }
-    setSpeechAvailable(true);
-
+  const buildRecognition = useCallback((SpeechRec: SpeechRecCtor) => {
     const rec = new SpeechRec();
     rec.continuous = true;
     rec.interimResults = true;
-    rec.lang = "en-US";
+    // Use the browser's preferred language so non-English speakers get correct recognition.
+    rec.lang = typeof navigator !== "undefined" ? (navigator.language || "en-US") : "en-US";
 
     rec.onresult = (e) => {
       const text = Array.from({ length: e.results.length })
@@ -87,14 +74,51 @@ export default function CapturePage() {
     rec.onerror = (e) => {
       if (e.error === "no-speech") {
         setCaptureState("idle");
+        // Rebuild so the next hold-to-talk starts fresh.
+        if (SpeechRecCtorRef.current) {
+          recognitionRef.current = buildRecognition(SpeechRecCtorRef.current);
+        }
         return;
       }
-      setErrorMsg(`Microphone error: ${e.error}`);
+      if (e.error === "not-allowed") {
+        setErrorMsg("Microphone access denied. Please allow microphone permission and try again.");
+        setSpeechAvailable(false);
+        setTextMode(true);
+      } else {
+        setErrorMsg(`Microphone error: ${e.error}. Tap to try again.`);
+      }
       setCaptureState("error");
+      // Rebuild so a retry creates a clean instance.
+      if (SpeechRecCtorRef.current) {
+        recognitionRef.current = buildRecognition(SpeechRecCtorRef.current);
+      }
     };
 
-    recognitionRef.current = rec;
-    return () => rec.abort();
+    return rec;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    void (async () => {
+      const fresh = await fetchEntries();
+      setRecentEntries(fresh.slice(0, 5));
+    })();
+
+    const w = window as unknown as {
+      SpeechRecognition?: SpeechRecCtor;
+      webkitSpeechRecognition?: SpeechRecCtor;
+    };
+    const SpeechRec = w.SpeechRecognition ?? w.webkitSpeechRecognition;
+
+    if (!SpeechRec) {
+      setTextMode(true);
+      return;
+    }
+    setSpeechAvailable(true);
+    SpeechRecCtorRef.current = SpeechRec;
+    recognitionRef.current = buildRecognition(SpeechRec);
+
+    return () => recognitionRef.current?.abort();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -105,7 +129,11 @@ export default function CapturePage() {
     setResult(null);
     setErrorMsg("");
     setCaptureState("recording");
-    recognitionRef.current.start();
+    try {
+      recognitionRef.current.start();
+    } catch {
+      // Already started — ignore the InvalidStateError from double-tap.
+    }
   }, []);
 
   const stopRecording = useCallback(() => {
@@ -155,6 +183,9 @@ export default function CapturePage() {
     setResult(null);
     setTextInput("");
     setErrorMsg("");
+    if (SpeechRecCtorRef.current && !recognitionRef.current) {
+      recognitionRef.current = buildRecognition(SpeechRecCtorRef.current);
+    }
   }
 
   function handlePointerDown() {

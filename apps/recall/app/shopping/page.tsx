@@ -197,9 +197,9 @@ function ShoppingPageContent() {
   }
 
   const tabLabels: Record<Tab, string> = {
-    search: "Search",
-    memories: "Memories",
-    profile: "Profile",
+    search: "🔍 Search",
+    memories: "🧠 Memories",
+    profile: "⚙️ Profile",
   };
 
   return (
@@ -215,11 +215,7 @@ function ShoppingPageContent() {
         </div>
       </header>
 
-      <div
-        className="shopping-tabs"
-        role="tablist"
-        aria-label="Shopping sections"
-      >
+      <div className="shopping-tabs" role="tablist" aria-label="Shopping sections">
         {(["search", "memories", "profile"] as Tab[]).map((t) => (
           <button
             key={t}
@@ -236,16 +232,13 @@ function ShoppingPageContent() {
 
       {tab === "search" && (
         <div className="shopping-panel">
-          <form
-            className="shopping-search-row"
-            onSubmit={(e) => void handleSearch(e)}
-          >
+          <form className="shopping-search-row" onSubmit={(e) => void handleSearch(e)}>
             <input
               type="text"
               className="text-input"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder='e.g. white linen shirt size M under €80, or black sneakers from Zalando'
+              placeholder="e.g. white linen shirt size M under €80, or black sneakers from Zalando"
               autoFocus
               aria-label="Shopping search"
             />
@@ -354,7 +347,7 @@ function ShoppingPageContent() {
               className="text-input"
               value={newMemory}
               onChange={(e) => setNewMemory(e.target.value)}
-              placeholder='e.g. Returned Asket shirt — fabric too stiff'
+              placeholder="e.g. Returned Asket shirt — fabric too stiff"
               onKeyDown={(e) => {
                 if (e.key === "Enter") void saveMemory();
               }}
