@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { randomBytes } from "node:crypto";
+import { publicOriginFromRequest } from "@/lib/request-origin";
 import { getUserSupabase } from "@/lib/supabase-server";
 
 /**
@@ -35,8 +36,7 @@ export async function GET(request: Request) {
     }
   }
 
-  const origin = new URL(request.url).origin;
-  const feedUrl = `${origin}/api/calendar.ics?token=${token}`;
+  const feedUrl = `${publicOriginFromRequest(request)}/api/calendar.ics?token=${token}`;
 
   return NextResponse.json({ feedUrl, token });
 }

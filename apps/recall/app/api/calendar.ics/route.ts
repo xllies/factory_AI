@@ -60,6 +60,7 @@ export async function GET(req: NextRequest) {
     .select("*")
     .eq("user_id", userId)
     .eq("type", "action")
+    .eq("done", false)
     .not("due_at", "is", null)
     .order("due_at", { ascending: true });
 

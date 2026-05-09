@@ -58,23 +58,21 @@ export function entriesToIcs(entries: Entry[]): string {
     .map(entryToEvent)
     .filter((e): e is EventAttributes => e !== null);
 
+  const emptyCalendar = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Recall//EN",
+    "CALSCALE:GREGORIAN",
+    "END:VCALENDAR",
+  ].join("\r\n");
+
   if (events.length === 0) {
-    return [
-      "BEGIN:VCALENDAR",
-      "VERSION:2.0",
-      "PRODID:-//Recall//EN",
-      "END:VCALENDAR",
-    ].join("\r\n");
+    return emptyCalendar;
   }
 
   const { error, value } = createEvents(events);
   if (error || !value) {
-    return [
-      "BEGIN:VCALENDAR",
-      "VERSION:2.0",
-      "PRODID:-//Recall//EN",
-      "END:VCALENDAR",
-    ].join("\r\n");
+    return emptyCalendar;
   }
   return value;
 }

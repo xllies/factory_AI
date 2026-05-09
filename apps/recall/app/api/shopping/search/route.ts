@@ -1,15 +1,15 @@
 /**
  * GPT-powered shopping search.
  * Accepts a ShoppingIntent + optional ShoppingProfile and returns ranked candidates.
- * No browser automation — uses OpenAI to generate product recommendations with
- * direct retailer search URLs. Ported logic from shopping-assistent-factory
- * asket-product-search.mjs and zalando-product-search.mjs (cursor-runner branch).
+ * **Outbound links are always canonical retailer search URLs** built server-side from the
+ * user's country/currency — the model may hallucinate product pages; we ignore its `url` field.
  */
 
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import { env } from "@/lib/env";
 import type { ShoppingIntent, ShoppingProfile, ShoppingCandidate } from "@/lib/types";
+import { applyCanonicalRetailerUrls } from "@/lib/shopping-retailer-urls";
 
 interface SearchRequest {
   intent: ShoppingIntent;
@@ -17,32 +17,7 @@ interface SearchRequest {
   memories?: Array<{ summary: string; sentiment: string; retailer?: string | null }>;
 }
 
-// Build retailer search URLs based on garment class and filters.
-function asketSearchUrl(intent: ShoppingIntent): string {
-  const collectionMap: Record<string, string> = {
-    tops: "t-shirts",
-    bottoms: "trousers",
-    shoes: "shoes",
-    outerwear: "jackets",
-    underwear: "underwear",
-    accessories: "accessories",
-    dresses: "dresses",
-  };
-  const slug = collectionMap[intent.garmentClass] ?? intent.garmentClass;
-  return `https://www.asket.com/collections/${slug}`;
-}
-
-function zalandoSearchUrl(intent: ShoppingIntent, currency: string): string {
-  const domain = currency === "GBP" ? "en.zalando.co.uk" : "en.zalando.lv";
-  const q = encodeURIComponent(
-    [intent.color, intent.garmentClass, intent.size ? `size ${intent.size}` : ""]
-      .filter(Boolean)
-      .join(" ")
-  );
-  return `https://${domain}/search/?q=${q}`;
-}
-
-const SEARCH_SYSTEM = `You are a personal shopping assistant. Given a shopping intent and the user's style profile, generate 4-6 specific product recommendations.
+const SEARCH_SYSTEM = `You are a personal shopping assistant. Given a shopping intent and the user's style profile, generate 4-6 specific product *ideas* (not live inventory).
 
 For each candidate, provide:
 - title: specific product name (e.g. "Classic Oxford Shirt", "Slim Fit Chinos")
@@ -52,14 +27,15 @@ For each candidate, provide:
 - currency: 3-letter code matching the user's currency
 - size: recommended size based on the user's profile (null if no profile data)
 - color: specific color recommendation
-- url: a realistic, working retailer search URL (not a product page — a search or collection URL)
 - confidence: 0.0–1.0 score for how well this matches the intent
 
+Do NOT invent product URLs, product IDs, or paths. Omit "url" entirely (the API adds retailer search links).
+
 Rules:
-- Prefer "asket" for minimalist, sustainable basics (t-shirts, shirts, trousers, underwear).
-- Prefer "zalando" for wider variety, trend pieces, shoes.
+- Prefer "asket" for minimalist, sustainable basics (t-shirts, shirts, trousers, underwear). Asket does not carry all categories (e.g. limited footwear) — still suggest when it fits the brand.
+- Prefer "zalando" for wider variety, shoes, trend pieces.
 - If the user specified a retailer, only return candidates from that retailer.
-- Apply negative shopping memories: if the user had a bad experience with a brand/color/retailer, reduce confidence and note it.
+- Apply negative shopping memories: if the user had a bad experience with a brand/color/retailer, reduce confidence.
 - Apply the budget ceiling — exclude items above the budget.
 - Return ONLY valid JSON: { "candidates": [...] }`;
 
@@ -98,6 +74,24 @@ function buildSearchPrompt(req: SearchRequest): string {
   return parts.join("\n");
 }
 
+function mapRawToCandidate(
+  c: Record<string, unknown>,
+  intent: ShoppingIntent,
+  currency: string,
+): ShoppingCandidate {
+  return {
+    title: typeof c.title === "string" ? c.title : "Product",
+    brand: typeof c.brand === "string" ? c.brand : "",
+    retailer: typeof c.retailer === "string" ? c.retailer : "zalando",
+    price: typeof c.price === "number" ? c.price : null,
+    currency: typeof c.currency === "string" ? c.currency : currency,
+    size: typeof c.size === "string" ? c.size : intent.size,
+    color: typeof c.color === "string" ? c.color : intent.color,
+    url: "",
+    confidence: typeof c.confidence === "number" ? Math.min(1, Math.max(0, c.confidence)) : 0.5,
+  };
+}
+
 export async function POST(req: NextRequest) {
   const body = (await req.json()) as SearchRequest;
 
@@ -108,32 +102,37 @@ export async function POST(req: NextRequest) {
   const intent = body.intent;
   const currency = body.profile?.currency ?? intent.currency ?? "EUR";
 
-  // Fallback: generate basic candidates from known URL patterns without calling OpenAI.
+  const profile = body.profile;
+
+  const finalize = (candidates: ShoppingCandidate[]) =>
+    applyCanonicalRetailerUrls(candidates, intent, profile);
+
+  // Fallback: no OpenAI — two strong default suggestions; URLs filled by applyCanonicalRetailerUrls.
   if (!env.OPENAI_API_KEY) {
-    const fallback: ShoppingCandidate[] = [
+    const fallback: ShoppingCandidate[] = finalize([
       {
-        title: `${intent.color ? intent.color + " " : ""}${intent.garmentClass}`,
+        title: `${intent.color ? `${intent.color} ` : ""}${intent.garmentClass} (Asket)`,
         brand: "Asket",
         retailer: "asket",
         price: null,
         currency,
         size: intent.size,
         color: intent.color,
-        url: asketSearchUrl(intent),
+        url: "",
         confidence: 0.7,
       },
       {
-        title: `${intent.color ? intent.color + " " : ""}${intent.garmentClass}`,
+        title: `${intent.color ? `${intent.color} ` : ""}${intent.garmentClass} (Zalando)`,
         brand: "Various",
         retailer: "zalando",
         price: null,
         currency,
         size: intent.size,
         color: intent.color,
-        url: zalandoSearchUrl(intent, currency),
+        url: "",
         confidence: 0.6,
       },
-    ];
+    ]);
     return NextResponse.json({ candidates: fallback });
   }
 
@@ -154,25 +153,16 @@ export async function POST(req: NextRequest) {
     const parsed = JSON.parse(raw) as { candidates?: unknown[] };
     const rawCandidates = Array.isArray(parsed.candidates) ? parsed.candidates : [];
 
-    const candidates: ShoppingCandidate[] = rawCandidates
-      .filter((c): c is Record<string, unknown> => typeof c === "object" && c !== null)
-      .map((c) => ({
-        title: typeof c.title === "string" ? c.title : "Product",
-        brand: typeof c.brand === "string" ? c.brand : "",
-        retailer: typeof c.retailer === "string" ? c.retailer : "zalando",
-        price: typeof c.price === "number" ? c.price : null,
-        currency: typeof c.currency === "string" ? c.currency : currency,
-        size: typeof c.size === "string" ? c.size : intent.size,
-        color: typeof c.color === "string" ? c.color : intent.color,
-        url: typeof c.url === "string" ? c.url : zalandoSearchUrl(intent, currency),
-        confidence: typeof c.confidence === "number" ? Math.min(1, Math.max(0, c.confidence)) : 0.5,
-      }))
-      .sort((a, b) => b.confidence - a.confidence);
+    const candidates: ShoppingCandidate[] = finalize(
+      rawCandidates
+        .filter((row): row is Record<string, unknown> => typeof row === "object" && row !== null)
+        .map((row) => mapRawToCandidate(row, intent, currency))
+        .sort((a, b) => b.confidence - a.confidence),
+    );
 
     return NextResponse.json({ candidates });
   } catch {
-    // If OpenAI fails, return fallback search links.
-    const fallback: ShoppingCandidate[] = [
+    const fallback: ShoppingCandidate[] = finalize([
       {
         title: `${intent.garmentClass} on Asket`,
         brand: "Asket",
@@ -181,7 +171,7 @@ export async function POST(req: NextRequest) {
         currency,
         size: intent.size,
         color: intent.color,
-        url: asketSearchUrl(intent),
+        url: "",
         confidence: 0.6,
       },
       {
@@ -192,10 +182,10 @@ export async function POST(req: NextRequest) {
         currency,
         size: intent.size,
         color: intent.color,
-        url: zalandoSearchUrl(intent, currency),
+        url: "",
         confidence: 0.5,
       },
-    ];
+    ]);
     return NextResponse.json({ candidates: fallback });
   }
 }

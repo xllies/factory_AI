@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import NavLinks from "@/app/nav-links";
+import { AppChrome } from "@/app/app-chrome";
 
 export const metadata: Metadata = {
   title: "Recall",
@@ -12,11 +12,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <nav className="nav">
-          <span className="nav-brand">recall</span>
-          <NavLinks />
-        </nav>
-        {children}
+        <AppChrome>{children}</AppChrome>
       </body>
     </html>
   );
