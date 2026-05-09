@@ -3,13 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
   "bin": {
     "dark-factory": "./scripts/dark-factory.ts"
   },
   "scripts": {
     "plan": "tsx scripts/dark-factory.ts plan",
     "apply": "tsx scripts/dark-factory.ts apply",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "check:ai-bestie-env": "node scripts/check-ai-bestie-env.mjs",
+    "mvp:dev": "npm run dev -w apps/ai-bestie",
+    "mvp:build": "npm run build -w apps/ai-bestie",
+    "mvp:typecheck": "npm run typecheck -w apps/ai-bestie",
+    "mvp:lint": "npm run lint -w apps/ai-bestie"
   },
   "dependencies": {
     "ajv": "^8.17.1"
