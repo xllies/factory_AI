@@ -178,6 +178,7 @@ export default function UploadPage() {
                   {item.status === "processing" && "⏳ Classifying…"}
                   {item.status === "done" && item.result?.type === "memory" && "📌 Memory"}
                   {item.status === "done" && item.result?.type === "action" && "✅ Action"}
+                  {item.status === "done" && item.result?.type === "shopping" && "🛍️ Shopping"}
                   {item.status === "error" && "❌ Error"}
                 </span>
                 <button
