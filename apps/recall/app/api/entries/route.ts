@@ -4,7 +4,7 @@ import type { Entry, EntrySource } from "@/lib/types";
 
 interface DbRow {
   id: string;
-  type: "memory" | "action";
+  type: "memory" | "action" | "shopping";
   raw: string;
   summary: string;
   tags: string[] | null;

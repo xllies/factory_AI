@@ -1,4 +1,4 @@
-export type EntryType = "memory" | "action";
+export type EntryType = "memory" | "action" | "shopping";
 
 export type EntrySource = "voice" | "text" | "upload" | "import";
 
@@ -29,4 +29,57 @@ export interface ClassifyResult {
   /** ISO datetime if a time was mentioned, else null. */
   dueAt: string | null;
   location: string | null;
+  /** Populated when type === "shopping". */
+  shopping?: ShoppingIntent;
+}
+
+// ── Shopping types (ported from shopping-assistent-factory cursor-runner) ───
+
+export type GarmentClass =
+  | "tops" | "bottoms" | "shoes" | "dresses" | "outerwear" | "accessories" | "underwear";
+
+export type ShoppingSentiment = "positive" | "negative" | "neutral";
+
+export interface ShoppingIntent {
+  garmentClass: GarmentClass | string;
+  size: string | null;
+  color: string | null;
+  budget: number | null;
+  currency: string;
+  retailer: string | null;
+}
+
+export interface ShoppingCandidate {
+  title: string;
+  brand: string;
+  retailer: string;
+  price: number | null;
+  currency: string;
+  size: string | null;
+  color: string | null;
+  url: string;
+  confidence: number;
+}
+
+export interface ShoppingProfile {
+  country: string;
+  currency: string;
+  sizeTop: string | null;
+  sizeBottom: string | null;
+  sizeShoes: string | null;
+  sizeDress: string | null;
+  budgetAnchors: Record<string, number>;
+}
+
+export interface ShoppingMemory {
+  id: string;
+  summary: string;
+  sentiment: ShoppingSentiment;
+  tags: string[];
+  retailer: string | null;
+  brand: string | null;
+  product: string | null;
+  color: string | null;
+  pinned: boolean;
+  createdAt: string;
 }

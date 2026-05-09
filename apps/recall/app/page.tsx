@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { ClassifyResult, Entry } from "@/lib/types";
 import { createEntry, fetchEntries, getTimezone } from "@/lib/client-store";
 import { ensureNotificationPermission, scheduleReminder } from "@/lib/reminders";
@@ -29,6 +30,7 @@ interface SpeechRecognitionLike {
 }
 
 export default function CapturePage() {
+  const router = useRouter();
   const [captureState, setCaptureState] = useState<CaptureState>("idle");
   const [textMode, setTextMode] = useState(false);
   const [textInput, setTextInput] = useState("");
@@ -276,7 +278,9 @@ export default function CapturePage() {
         {result && isDone && (
           <div className={`result-card ${result.type}`}>
             <div className="result-type">
-              {result.type === "memory" ? "📌 Memory saved" : "✅ Action captured"}
+              {result.type === "memory" ? "📌 Memory saved"
+                : result.type === "shopping" ? "🛍️ Shopping request captured"
+                : "✅ Action captured"}
             </div>
             <p className="result-summary">{result.summary}</p>
 
@@ -290,6 +294,17 @@ export default function CapturePage() {
             )}
             {result.location && <p className="result-meta">📍 {result.location}</p>}
 
+            {result.type === "shopping" && result.shopping && (
+              <div style={{ marginTop: "0.5rem", fontSize: "0.85rem", opacity: 0.8 }}>
+                {result.shopping.garmentClass && <span>👕 {result.shopping.garmentClass}</span>}
+                {result.shopping.size && <span> · size {result.shopping.size}</span>}
+                {result.shopping.color && <span> · {result.shopping.color}</span>}
+                {result.shopping.budget && (
+                  <span> · under {result.shopping.budget} {result.shopping.currency}</span>
+                )}
+              </div>
+            )}
+
             {result.tags.length > 0 && (
               <div className="result-tags">
                 {result.tags.map((tag) => (
@@ -298,7 +313,17 @@ export default function CapturePage() {
               </div>
             )}
 
-            {result.dueAt && result.entryId && (
+            {result.type === "shopping" && (
+              <button
+                className="result-cal-link"
+                style={{ background: "none", border: "none", cursor: "pointer", padding: 0, color: "inherit", textDecoration: "underline" }}
+                onClick={() => router.push(`/shopping?q=${encodeURIComponent(result.raw)}`)}
+              >
+                🔍 Find products now
+              </button>
+            )}
+
+            {result.dueAt && result.entryId && result.type !== "shopping" && (
               <a
                 className="result-cal-link"
                 href={`/api/calendar/event/${result.entryId}.ics`}
@@ -320,7 +345,9 @@ export default function CapturePage() {
           <div className="recent-list">
             {recentEntries.slice(0, 3).map((entry) => (
               <div key={entry.id} className={`recent-item ${entry.type}`}>
-                <span className="recent-icon">{entry.type === "memory" ? "📌" : "✅"}</span>
+                <span className="recent-icon">
+                  {entry.type === "memory" ? "📌" : entry.type === "shopping" ? "🛍️" : "✅"}
+                </span>
                 <span className="recent-summary">{entry.summary}</span>
                 {entry.dueAt && (
                   <span className="recent-due">⏰ {relativeLabel(entry.dueAt)}</span>
