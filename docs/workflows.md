@@ -12,7 +12,7 @@ flow and Claude session continuity, see
 | Workflow | Trigger | Purpose |
 |---|---|---|
 | [`jira-dispatch.yml`](../.github/workflows/jira-dispatch.yml) | `repository_dispatch: jira_manual_button` from Jira automation, or manual `workflow_dispatch` | Turn a Jira ticket into reviewable repo work or a Jira-facing answer. Resumes Claude across runs. |
-| [`jira-requirements-dispatch.yml`](../.github/workflows/jira-requirements-dispatch.yml) | `repository_dispatch: jira_requirements_button` from Jira automation, or manual `workflow_dispatch` | Run the requirements to Jira plan/apply pipeline independently from the Claude ticket orchestration flow. |
+| [`jira-requirements-dispatch.yml`](../.github/workflows/jira-requirements-dispatch.yml) | `repository_dispatch: jira_requirements_button` from Jira automation, or manual `workflow_dispatch` | Run requirements to Jira plan/apply independently, sourcing requirements directly from the triggering Jira issue content. |
 | [`jira-pr-merged.yml`](../.github/workflows/jira-pr-merged.yml) | `pull_request: closed` on `tdf/<key>` branches | When a dispatch-flow PR is merged, transition the Jira ticket to Done and delete the head branch. |
 | [`poc-session.yml`](../.github/workflows/poc-session.yml) | Manual `workflow_dispatch` | Proof-of-concept that Claude Code sessions can be resumed across runner invocations. |
 

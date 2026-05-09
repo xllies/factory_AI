@@ -6,13 +6,8 @@ on:
   workflow_dispatch:
     inputs:
       issue_key:
-        description: "Optional Jira issue key for traceability (e.g., KAN-8)"
-        required: false
-        type: string
-      source_path:
-        description: "Markdown requirements source path"
-        required: false
-        default: "specs/product-requirements.md"
+        description: "Jira issue key to use as requirements source (e.g., KAN-8)"
+        required: true
         type: string
       plan_out:
         description: "Generated plan output path"
@@ -48,7 +43,7 @@ jobs:
     timeout-minutes: 20
     env:
       ISSUE_KEY: ${{ github.event.client_payload.issue_key || inputs.issue_key }}
-      SOURCE_PATH: ${{ github.event.client_payload.source_path || inputs.source_path || 'specs/product-requirements.md' }}
+      SOURCE_PATH: output/requirements-from-jira.md
       PLAN_OUT: ${{ github.event.client_payload.plan_out || inputs.plan_out || 'output/generated-plan.json' }}
       PROJECT_KEY: ${{ github.event.client_payload.project_key || inputs.project_key || 'KAN' }}
       APPLY_APPROVE: ${{ github.event.client_payload.apply_approve || inputs.apply_approve || 'false' }}
@@ -71,6 +66,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Build requirements markdown from Jira ticket
+        run: node .github/scripts/jira-requirements-source.mjs
 
       - name: Generate Jira plan from requirements
         run: npx tsx scripts/dark-factory.ts plan "$SOURCE_PATH" --out "$PLAN_OUT"
