@@ -1,0 +1,659 @@
+{
+  "source_file": "specs/product-requirements.md",
+  "summary": "Generated from Product Requirements: Dark Factory MVP.",
+  "open_questions": [
+    "Should complexity be estimated from text heuristics or set manually after review?",
+    "Should generated labels include requirement section slugs by default?"
+  ],
+  "epics": [
+    {
+      "title": "Requirements Ingestion",
+      "description": "Delivery for product area: Requirements Ingestion",
+      "source_sections": [
+        "Requirements Ingestion"
+      ],
+      "tasks": [
+        {
+          "title": "Support a default requirements file at `specs/product-requirements.md`.",
+          "description": "Implement requirement: Support a default requirements file at `specs/product-requirements.md`.",
+          "acceptance_criteria": [
+            "Requirement implemented: Support a default requirements file at `specs/product-requirements.md`."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "medium",
+          "source_sections": [
+            "Requirements Ingestion"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Support a default requirements file a...",
+              "description": "Deliver code and configuration for: Support a default requirements file at `specs/product-requirements.md`.",
+              "acceptance_criteria": [
+                "Implementation complete for Support a default requirements file at `specs/product-requirements.md`."
+              ],
+              "source_sections": [
+                "Requirements Ingestion"
+              ]
+            },
+            {
+              "title": "Validate Support a default requirements file a...",
+              "description": "Validate behavior and quality for: Support a default requirements file at `specs/product-requirements.md`.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Requirements Ingestion"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Allow overriding the source path from the CLI.",
+          "description": "Implement requirement: Allow overriding the source path from the CLI.",
+          "acceptance_criteria": [
+            "Requirement implemented: Allow overriding the source path from the CLI."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "medium",
+          "source_sections": [
+            "Requirements Ingestion"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Allow overriding the source path from...",
+              "description": "Deliver code and configuration for: Allow overriding the source path from the CLI.",
+              "acceptance_criteria": [
+                "Implementation complete for Allow overriding the source path from the CLI."
+              ],
+              "source_sections": [
+                "Requirements Ingestion"
+              ]
+            },
+            {
+              "title": "Validate Allow overriding the source path from...",
+              "description": "Validate behavior and quality for: Allow overriding the source path from the CLI.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Requirements Ingestion"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Preserve section traceability from markdown headings.",
+          "description": "Implement requirement: Preserve section traceability from markdown headings.",
+          "acceptance_criteria": [
+            "Requirement implemented: Preserve section traceability from markdown headings."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "small",
+          "source_sections": [
+            "Requirements Ingestion"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Preserve section traceability from ma...",
+              "description": "Deliver code and configuration for: Preserve section traceability from markdown headings.",
+              "acceptance_criteria": [
+                "Implementation complete for Preserve section traceability from markdown headings."
+              ],
+              "source_sections": [
+                "Requirements Ingestion"
+              ]
+            },
+            {
+              "title": "Validate Preserve section traceability from ma...",
+              "description": "Validate behavior and quality for: Preserve section traceability from markdown headings.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Requirements Ingestion"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Plan Generation",
+      "description": "Delivery for product area: Plan Generation",
+      "source_sections": [
+        "Plan Generation"
+      ],
+      "tasks": [
+        {
+          "title": "Build a structured plan with epics, tasks, and subtasks.",
+          "description": "Implement requirement: Build a structured plan with epics, tasks, and subtasks.",
+          "acceptance_criteria": [
+            "Requirement implemented: Build a structured plan with epics, tasks, and subtasks."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "small",
+          "source_sections": [
+            "Plan Generation"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Build a structured plan with epics, t...",
+              "description": "Deliver code and configuration for: Build a structured plan with epics, tasks, and subtasks.",
+              "acceptance_criteria": [
+                "Implementation complete for Build a structured plan with epics, tasks, and subtasks."
+              ],
+              "source_sections": [
+                "Plan Generation"
+              ]
+            },
+            {
+              "title": "Validate Build a structured plan with epics, t...",
+              "description": "Validate behavior and quality for: Build a structured plan with epics, tasks, and subtasks.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Plan Generation"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Capture acceptance criteria from requirement sections.",
+          "description": "Implement requirement: Capture acceptance criteria from requirement sections.",
+          "acceptance_criteria": [
+            "Requirement implemented: Capture acceptance criteria from requirement sections."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "small",
+          "source_sections": [
+            "Plan Generation"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Capture acceptance criteria from requ...",
+              "description": "Deliver code and configuration for: Capture acceptance criteria from requirement sections.",
+              "acceptance_criteria": [
+                "Implementation complete for Capture acceptance criteria from requirement sections."
+              ],
+              "source_sections": [
+                "Plan Generation"
+              ]
+            },
+            {
+              "title": "Validate Capture acceptance criteria from requ...",
+              "description": "Validate behavior and quality for: Capture acceptance criteria from requirement sections.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Plan Generation"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Identify open questions when details are missing or ambiguous.",
+          "description": "Implement requirement: Identify open questions when details are missing or ambiguous.",
+          "acceptance_criteria": [
+            "Requirement implemented: Identify open questions when details are missing or ambiguous."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "small",
+          "source_sections": [
+            "Plan Generation"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Identify open questions when details ...",
+              "description": "Deliver code and configuration for: Identify open questions when details are missing or ambiguous.",
+              "acceptance_criteria": [
+                "Implementation complete for Identify open questions when details are missing or ambiguous."
+              ],
+              "source_sections": [
+                "Plan Generation"
+              ]
+            },
+            {
+              "title": "Validate Identify open questions when details ...",
+              "description": "Validate behavior and quality for: Identify open questions when details are missing or ambiguous.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Plan Generation"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Jira Application",
+      "description": "Delivery for product area: Jira Application",
+      "source_sections": [
+        "Jira Application"
+      ],
+      "tasks": [
+        {
+          "title": "Provide a review-first workflow before Jira mutation.",
+          "description": "Implement requirement: Provide a review-first workflow before Jira mutation.",
+          "acceptance_criteria": [
+            "Requirement implemented: Provide a review-first workflow before Jira mutation."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "small",
+          "source_sections": [
+            "Jira Application"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Provide a review-first workflow befor...",
+              "description": "Deliver code and configuration for: Provide a review-first workflow before Jira mutation.",
+              "acceptance_criteria": [
+                "Implementation complete for Provide a review-first workflow before Jira mutation."
+              ],
+              "source_sections": [
+                "Jira Application"
+              ]
+            },
+            {
+              "title": "Validate Provide a review-first workflow befor...",
+              "description": "Validate behavior and quality for: Provide a review-first workflow before Jira mutation.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Jira Application"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Create Epics, Tasks, and Subtasks with hierarchy links.",
+          "description": "Implement requirement: Create Epics, Tasks, and Subtasks with hierarchy links.",
+          "acceptance_criteria": [
+            "Requirement implemented: Create Epics, Tasks, and Subtasks with hierarchy links."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "medium",
+          "source_sections": [
+            "Jira Application"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Create Epics, Tasks, and Subtasks wit...",
+              "description": "Deliver code and configuration for: Create Epics, Tasks, and Subtasks with hierarchy links.",
+              "acceptance_criteria": [
+                "Implementation complete for Create Epics, Tasks, and Subtasks with hierarchy links."
+              ],
+              "source_sections": [
+                "Jira Application"
+              ]
+            },
+            {
+              "title": "Validate Create Epics, Tasks, and Subtasks wit...",
+              "description": "Validate behavior and quality for: Create Epics, Tasks, and Subtasks with hierarchy links.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Jira Application"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Return a summary containing created issue keys and URLs.",
+          "description": "Implement requirement: Return a summary containing created issue keys and URLs.",
+          "acceptance_criteria": [
+            "Requirement implemented: Return a summary containing created issue keys and URLs."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "medium",
+          "source_sections": [
+            "Jira Application"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Return a summary containing created i...",
+              "description": "Deliver code and configuration for: Return a summary containing created issue keys and URLs.",
+              "acceptance_criteria": [
+                "Implementation complete for Return a summary containing created issue keys and URLs."
+              ],
+              "source_sections": [
+                "Jira Application"
+              ]
+            },
+            {
+              "title": "Validate Return a summary containing created i...",
+              "description": "Validate behavior and quality for: Return a summary containing created issue keys and URLs.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Jira Application"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Product owner can generate a plan",
+      "description": "Delivery for product area: Product owner can generate a plan",
+      "source_sections": [
+        "Product owner can generate a plan"
+      ],
+      "tasks": [
+        {
+          "title": "Plan command reads default source path when no input is provided.",
+          "description": "Implement requirement: Plan command reads default source path when no input is provided.",
+          "acceptance_criteria": [
+            "Requirement implemented: Plan command reads default source path when no input is provided."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "small",
+          "source_sections": [
+            "Product owner can generate a plan"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Plan command reads default source pat...",
+              "description": "Deliver code and configuration for: Plan command reads default source path when no input is provided.",
+              "acceptance_criteria": [
+                "Implementation complete for Plan command reads default source path when no input is provided."
+              ],
+              "source_sections": [
+                "Product owner can generate a plan"
+              ]
+            },
+            {
+              "title": "Validate Plan command reads default source pat...",
+              "description": "Validate behavior and quality for: Plan command reads default source path when no input is provided.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Product owner can generate a plan"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Plan output contains epics, tasks, subtasks, and open questions.",
+          "description": "Implement requirement: Plan output contains epics, tasks, subtasks, and open questions.",
+          "acceptance_criteria": [
+            "Requirement implemented: Plan output contains epics, tasks, subtasks, and open questions."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "small",
+          "source_sections": [
+            "Product owner can generate a plan"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Plan output contains epics, tasks, su...",
+              "description": "Deliver code and configuration for: Plan output contains epics, tasks, subtasks, and open questions.",
+              "acceptance_criteria": [
+                "Implementation complete for Plan output contains epics, tasks, subtasks, and open questions."
+              ],
+              "source_sections": [
+                "Product owner can generate a plan"
+              ]
+            },
+            {
+              "title": "Validate Plan output contains epics, tasks, su...",
+              "description": "Validate behavior and quality for: Plan output contains epics, tasks, subtasks, and open questions.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Product owner can generate a plan"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Source sections are referenced in generated items.",
+          "description": "Implement requirement: Source sections are referenced in generated items.",
+          "acceptance_criteria": [
+            "Requirement implemented: Source sections are referenced in generated items."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "small",
+          "source_sections": [
+            "Product owner can generate a plan"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Source sections are referenced in gen...",
+              "description": "Deliver code and configuration for: Source sections are referenced in generated items.",
+              "acceptance_criteria": [
+                "Implementation complete for Source sections are referenced in generated items."
+              ],
+              "source_sections": [
+                "Product owner can generate a plan"
+              ]
+            },
+            {
+              "title": "Validate Source sections are referenced in gen...",
+              "description": "Validate behavior and quality for: Source sections are referenced in generated items.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Product owner can generate a plan"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Engineering lead can review before apply",
+      "description": "Delivery for product area: Engineering lead can review before apply",
+      "source_sections": [
+        "Engineering lead can review before apply"
+      ],
+      "tasks": [
+        {
+          "title": "Apply command prints a preflight hierarchy summary.",
+          "description": "Implement requirement: Apply command prints a preflight hierarchy summary.",
+          "acceptance_criteria": [
+            "Requirement implemented: Apply command prints a preflight hierarchy summary."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "small",
+          "source_sections": [
+            "Engineering lead can review before apply"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Apply command prints a preflight hier...",
+              "description": "Deliver code and configuration for: Apply command prints a preflight hierarchy summary.",
+              "acceptance_criteria": [
+                "Implementation complete for Apply command prints a preflight hierarchy summary."
+              ],
+              "source_sections": [
+                "Engineering lead can review before apply"
+              ]
+            },
+            {
+              "title": "Validate Apply command prints a preflight hier...",
+              "description": "Validate behavior and quality for: Apply command prints a preflight hierarchy summary.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Engineering lead can review before apply"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Jira writes are blocked unless explicit approval is provided.",
+          "description": "Implement requirement: Jira writes are blocked unless explicit approval is provided.",
+          "acceptance_criteria": [
+            "Requirement implemented: Jira writes are blocked unless explicit approval is provided."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "small",
+          "source_sections": [
+            "Engineering lead can review before apply"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Jira writes are blocked unless explic...",
+              "description": "Deliver code and configuration for: Jira writes are blocked unless explicit approval is provided.",
+              "acceptance_criteria": [
+                "Implementation complete for Jira writes are blocked unless explicit approval is provided."
+              ],
+              "source_sections": [
+                "Engineering lead can review before apply"
+              ]
+            },
+            {
+              "title": "Validate Jira writes are blocked unless explic...",
+              "description": "Validate behavior and quality for: Jira writes are blocked unless explicit approval is provided.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Engineering lead can review before apply"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Developer receives actionable Jira tasks",
+      "description": "Delivery for product area: Developer receives actionable Jira tasks",
+      "source_sections": [
+        "Developer receives actionable Jira tasks"
+      ],
+      "tasks": [
+        {
+          "title": "Generated tasks include clear descriptions and acceptance criteria.",
+          "description": "Implement requirement: Generated tasks include clear descriptions and acceptance criteria.",
+          "acceptance_criteria": [
+            "Requirement implemented: Generated tasks include clear descriptions and acceptance criteria."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "small",
+          "source_sections": [
+            "Developer receives actionable Jira tasks"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Generated tasks include clear descrip...",
+              "description": "Deliver code and configuration for: Generated tasks include clear descriptions and acceptance criteria.",
+              "acceptance_criteria": [
+                "Implementation complete for Generated tasks include clear descriptions and acceptance criteria."
+              ],
+              "source_sections": [
+                "Developer receives actionable Jira tasks"
+              ]
+            },
+            {
+              "title": "Validate Generated tasks include clear descrip...",
+              "description": "Validate behavior and quality for: Generated tasks include clear descriptions and acceptance criteria.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Developer receives actionable Jira tasks"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Subtasks are linked to parent tasks.",
+          "description": "Implement requirement: Subtasks are linked to parent tasks.",
+          "acceptance_criteria": [
+            "Requirement implemented: Subtasks are linked to parent tasks."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "small",
+          "source_sections": [
+            "Developer receives actionable Jira tasks"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Subtasks are linked to parent tasks.",
+              "description": "Deliver code and configuration for: Subtasks are linked to parent tasks.",
+              "acceptance_criteria": [
+                "Implementation complete for Subtasks are linked to parent tasks."
+              ],
+              "source_sections": [
+                "Developer receives actionable Jira tasks"
+              ]
+            },
+            {
+              "title": "Validate Subtasks are linked to parent tasks.",
+              "description": "Validate behavior and quality for: Subtasks are linked to parent tasks.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Developer receives actionable Jira tasks"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Tasks are grouped under the correct epic.",
+          "description": "Implement requirement: Tasks are grouped under the correct epic.",
+          "acceptance_criteria": [
+            "Requirement implemented: Tasks are grouped under the correct epic."
+          ],
+          "dependencies": [],
+          "priority": "medium",
+          "complexity": "small",
+          "source_sections": [
+            "Developer receives actionable Jira tasks"
+          ],
+          "subtasks": [
+            {
+              "title": "Implement Tasks are grouped under the correct e...",
+              "description": "Deliver code and configuration for: Tasks are grouped under the correct epic.",
+              "acceptance_criteria": [
+                "Implementation complete for Tasks are grouped under the correct epic."
+              ],
+              "source_sections": [
+                "Developer receives actionable Jira tasks"
+              ]
+            },
+            {
+              "title": "Validate Tasks are grouped under the correct e...",
+              "description": "Validate behavior and quality for: Tasks are grouped under the correct epic.",
+              "acceptance_criteria": [
+                "Verification checks pass."
+              ],
+              "source_sections": [
+                "Developer receives actionable Jira tasks"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
