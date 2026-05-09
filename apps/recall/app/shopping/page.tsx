@@ -530,7 +530,7 @@ function CandidateCard({ candidate: c, onSaveMemory }: CandidateCardProps) {
           rel="noopener noreferrer"
           className="shopping-shop-link"
         >
-          Shop
+          Search
         </a>
       </div>
     </article>
