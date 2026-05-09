@@ -60,6 +60,11 @@ Easiest path — paste each migration into the SQL editor in order:
 
 1. `apps/recall/supabase/migrations/001_init_recall.sql`
 2. `apps/recall/supabase/migrations/002_auth_and_reminders.sql`
+3. `apps/recall/supabase/migrations/003_shopping.sql` (shopping assistant tables + RLS)
+4. `apps/recall/supabase/migrations/004_shopping_memories_owner_trigger.sql` (depends on 003)
+5. `apps/recall/supabase/migrations/005_recall_shopping_profiles_owner_trigger.sql` (depends on 003)
+
+Steps 4–5 fix RLS owner alignment for inserts; they **fail** if you skip step 3 (`relation … does not exist`).
 
 Or, with the Supabase CLI:
 
@@ -136,7 +141,10 @@ apps/recall/
 └── supabase/
     └── migrations/
         ├── 001_init_recall.sql
-        └── 002_auth_and_reminders.sql
+        ├── 002_auth_and_reminders.sql
+        ├── 003_shopping.sql
+        ├── 004_shopping_memories_owner_trigger.sql
+        └── 005_recall_shopping_profiles_owner_trigger.sql
 ```
 
 ## Roadmap (Stage 2)

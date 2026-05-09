@@ -45,27 +45,66 @@ export async function getShoppingProfile(): Promise<ShoppingProfile | null> {
   };
 }
 
-export async function upsertShoppingProfile(patch: Partial<ShoppingProfile>): Promise<void> {
+export type UpsertShoppingProfileResult =
+  | { ok: true }
+  | { ok: false; code: "no_client" | "no_user" | "db_error"; message?: string };
+
+/**
+ * Upsert without sending `user_id` — DB trigger sets it on insert so `auth.uid()` always matches RLS.
+ * Use `onConflict: user_id` so existing rows (e.g. from signup trigger) update correctly.
+ */
+export async function upsertShoppingProfile(
+  patch: Partial<ShoppingProfile>,
+): Promise<UpsertShoppingProfileResult> {
   const supabase = await getUserSupabase();
-  if (!supabase) return;
+  if (!supabase) return { ok: false, code: "no_client" };
 
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return;
+  if (!user) return { ok: false, code: "no_user" };
 
-  await supabase.from("recall_shopping_profiles").upsert({
-    user_id: user.id,
-    ...(patch.country !== undefined && { country: patch.country }),
-    ...(patch.currency !== undefined && { currency: patch.currency }),
-    ...(patch.sizeTop !== undefined && { size_top: patch.sizeTop }),
-    ...(patch.sizeBottom !== undefined && { size_bottom: patch.sizeBottom }),
-    ...(patch.sizeShoes !== undefined && { size_shoes: patch.sizeShoes }),
-    ...(patch.sizeDress !== undefined && { size_dress: patch.sizeDress }),
-    ...(patch.budgetAnchors !== undefined && { budget_anchors: patch.budgetAnchors }),
+  const row: Record<string, unknown> = {
     updated_at: new Date().toISOString(),
+  };
+  if (patch.country !== undefined) row.country = patch.country;
+  if (patch.currency !== undefined) row.currency = patch.currency;
+  if (patch.sizeTop !== undefined) row.size_top = patch.sizeTop;
+  if (patch.sizeBottom !== undefined) row.size_bottom = patch.sizeBottom;
+  if (patch.sizeShoes !== undefined) row.size_shoes = patch.sizeShoes;
+  if (patch.sizeDress !== undefined) row.size_dress = patch.sizeDress;
+  if (patch.budgetAnchors !== undefined) row.budget_anchors = patch.budgetAnchors;
+
+  const { error } = await supabase.from("recall_shopping_profiles").upsert(row, {
+    onConflict: "user_id",
   });
+
+  if (error) return { ok: false, code: "db_error", message: error.message };
+  return { ok: true };
 }
 
 // ── Memories ─────────────────────────────────────────────────────────────────
+
+/** Uses only validated JWT user — must match what Postgres sees as `auth.uid()` for RLS. */
+async function resolveShoppingUserId(
+  supabase: NonNullable<Awaited<ReturnType<typeof getUserSupabase>>>,
+): Promise<string | null> {
+  const { data: u } = await supabase.auth.getUser();
+  return u.user?.id ?? null;
+}
+
+function mapMemoryRow(row: Record<string, unknown>): ShoppingMemory {
+  return {
+    id: row.id as string,
+    summary: row.summary as string,
+    sentiment: row.sentiment as ShoppingSentiment,
+    tags: (row.tags as string[]) ?? [],
+    retailer: row.retailer as string | null,
+    brand: row.brand as string | null,
+    product: row.product as string | null,
+    color: row.color as string | null,
+    pinned: Boolean(row.pinned),
+    createdAt: row.created_at as string,
+  };
+}
 
 function inferSentiment(text: string): ShoppingSentiment {
   const lower = text.toLowerCase();
@@ -80,35 +119,31 @@ function inferSentiment(text: string): ShoppingSentiment {
   return "neutral";
 }
 
-export async function getShoppingMemories(): Promise<ShoppingMemory[]> {
-  const supabase = await getUserSupabase();
-  if (!supabase) return [];
+export type GetShoppingMemoriesResult =
+  | { ok: true; memories: ShoppingMemory[] }
+  | { ok: false; code: "no_client" | "no_user" | "db_error"; message?: string };
 
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return [];
+export async function getShoppingMemories(): Promise<GetShoppingMemoriesResult> {
+  const supabase = await getUserSupabase();
+  if (!supabase) return { ok: false, code: "no_client" };
+
+  const userId = await resolveShoppingUserId(supabase);
+  if (!userId) return { ok: false, code: "no_user" };
 
   const { data, error } = await supabase
     .from("recall_shopping_memories")
     .select("*")
-    .eq("user_id", user.id)
+    .eq("user_id", userId)
     .order("pinned", { ascending: false })
     .order("created_at", { ascending: false })
     .limit(100);
 
-  if (error || !data) return [];
+  if (error) {
+    return { ok: false, code: "db_error", message: error.message };
+  }
+  if (!data) return { ok: true, memories: [] };
 
-  return data.map((row) => ({
-    id: row.id as string,
-    summary: row.summary as string,
-    sentiment: row.sentiment as ShoppingSentiment,
-    tags: (row.tags as string[]) ?? [],
-    retailer: row.retailer as string | null,
-    brand: row.brand as string | null,
-    product: row.product as string | null,
-    color: row.color as string | null,
-    pinned: Boolean(row.pinned),
-    createdAt: row.created_at as string,
-  }));
+  return { ok: true, memories: data.map((row) => mapMemoryRow(row as Record<string, unknown>)) };
 }
 
 export interface CreateMemoryInput {
@@ -122,19 +157,23 @@ export interface CreateMemoryInput {
   pinned?: boolean;
 }
 
-export async function createShoppingMemory(input: CreateMemoryInput): Promise<ShoppingMemory | null> {
-  const supabase = await getUserSupabase();
-  if (!supabase) return null;
+export type CreateShoppingMemoryResult =
+  | { ok: true; memory: ShoppingMemory }
+  | { ok: false; code: "no_client" | "no_user" | "db_error"; message?: string };
 
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
+export async function createShoppingMemory(input: CreateMemoryInput): Promise<CreateShoppingMemoryResult> {
+  const supabase = await getUserSupabase();
+  if (!supabase) return { ok: false, code: "no_client" };
+
+  const userId = await resolveShoppingUserId(supabase);
+  if (!userId) return { ok: false, code: "no_user" };
 
   const sentiment = input.sentiment ?? inferSentiment(input.summary);
 
+  // Omit user_id: DB trigger sets it from auth.uid() so RLS always matches the JWT.
   const { data, error } = await supabase
     .from("recall_shopping_memories")
     .insert({
-      user_id: user.id,
       summary: input.summary.trim(),
       sentiment,
       tags: input.tags ?? [],
@@ -147,46 +186,40 @@ export async function createShoppingMemory(input: CreateMemoryInput): Promise<Sh
     .select()
     .single();
 
-  if (error || !data) return null;
+  if (error) {
+    return { ok: false, code: "db_error", message: error.message };
+  }
+  if (!data) {
+    return { ok: false, code: "db_error", message: "Insert returned no row" };
+  }
 
-  return {
-    id: data.id as string,
-    summary: data.summary as string,
-    sentiment: data.sentiment as ShoppingSentiment,
-    tags: (data.tags as string[]) ?? [],
-    retailer: data.retailer as string | null,
-    brand: data.brand as string | null,
-    product: data.product as string | null,
-    color: data.color as string | null,
-    pinned: Boolean(data.pinned),
-    createdAt: data.created_at as string,
-  };
+  return { ok: true, memory: mapMemoryRow(data as Record<string, unknown>) };
 }
 
 export async function deleteShoppingMemory(id: string): Promise<void> {
   const supabase = await getUserSupabase();
   if (!supabase) return;
 
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return;
+  const userId = await resolveShoppingUserId(supabase);
+  if (!userId) return;
 
   await supabase
     .from("recall_shopping_memories")
     .delete()
     .eq("id", id)
-    .eq("user_id", user.id);
+    .eq("user_id", userId);
 }
 
 export async function pinShoppingMemory(id: string, pinned: boolean): Promise<void> {
   const supabase = await getUserSupabase();
   if (!supabase) return;
 
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return;
+  const userId = await resolveShoppingUserId(supabase);
+  if (!userId) return;
 
   await supabase
     .from("recall_shopping_memories")
     .update({ pinned })
     .eq("id", id)
-    .eq("user_id", user.id);
+    .eq("user_id", userId);
 }

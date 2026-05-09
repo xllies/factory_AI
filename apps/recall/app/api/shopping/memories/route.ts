@@ -7,8 +7,20 @@ import {
 } from "@/lib/shopping";
 
 export async function GET() {
-  const memories = await getShoppingMemories();
-  return NextResponse.json({ memories });
+  const result = await getShoppingMemories();
+  if (!result.ok) {
+    if (result.code === "no_client") {
+      return NextResponse.json({ memories: [], reason: "supabase_unconfigured" as const });
+    }
+    if (result.code === "no_user") {
+      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    }
+    return NextResponse.json(
+      { error: "Could not load shopping memories", detail: result.message },
+      { status: 500 },
+    );
+  }
+  return NextResponse.json({ memories: result.memories });
 }
 
 export async function POST(req: NextRequest) {
@@ -27,11 +39,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "summary is required" }, { status: 400 });
   }
 
-  const memory = await createShoppingMemory(body);
-  if (!memory) {
-    return NextResponse.json({ error: "Failed to create memory" }, { status: 500 });
+  const result = await createShoppingMemory(body);
+  if (!result.ok) {
+    if (result.code === "no_client") {
+      return NextResponse.json({ error: "Supabase is not configured" }, { status: 503 });
+    }
+    if (result.code === "no_user") {
+      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    }
+    return NextResponse.json(
+      { error: "Failed to save memory", detail: result.message },
+      { status: 500 },
+    );
   }
-  return NextResponse.json({ memory }, { status: 201 });
+  return NextResponse.json({ memory: result.memory }, { status: 201 });
 }
 
 export async function PATCH(req: NextRequest) {
