@@ -1,6 +1,14 @@
 import { NextResponse } from "next/server";
 import { randomBytes } from "node:crypto";
+import { env } from "@/lib/env";
 import { getUserSupabase } from "@/lib/supabase-server";
+
+function publicOrigin(request: Request): string {
+  if (env.APP_BASE_URL) {
+    return env.APP_BASE_URL.replace(/\/+$/, "");
+  }
+  return new URL(request.url).origin;
+}
 
 /**
  * Returns the user's iCalendar feed URL, creating a token row on first call.
@@ -35,8 +43,7 @@ export async function GET(request: Request) {
     }
   }
 
-  const origin = new URL(request.url).origin;
-  const feedUrl = `${origin}/api/calendar.ics?token=${token}`;
+  const feedUrl = `${publicOrigin(request)}/api/calendar.ics?token=${token}`;
 
   return NextResponse.json({ feedUrl, token });
 }

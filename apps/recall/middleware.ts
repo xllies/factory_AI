@@ -1,13 +1,7 @@
+import { getSafeInternalPath } from "@/lib/auth-redirect";
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 
-/**
- * Middleware refreshes the Supabase auth cookie on every request and
- * redirects unauthenticated visitors to /login for protected routes.
- *
- * Public routes: /login, /auth/callback, /api/calendar.ics, /api/health
- * Everything else requires a session.
- */
 const PUBLIC_PREFIXES = [
   "/login",
   "/auth/callback",
@@ -21,7 +15,6 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
   const isPublic = PUBLIC_PREFIXES.some((p) => url.pathname.startsWith(p));
 
-  // If Supabase isn't configured, do nothing — the app falls back to local-only mode.
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!supabaseUrl || !supabaseKey) {
@@ -57,10 +50,9 @@ export async function middleware(request: NextRequest) {
   }
 
   if (user && url.pathname === "/login") {
-    const redirect = url.clone();
-    redirect.pathname = "/today";
-    redirect.search = "";
-    return NextResponse.redirect(redirect);
+    const safe = getSafeInternalPath(url.searchParams.get("next"));
+    const target = new URL(safe, url.origin);
+    return NextResponse.redirect(target);
   }
 
   return response;
