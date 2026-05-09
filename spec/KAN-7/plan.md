@@ -26,3 +26,13 @@ can drive a Jira ticket → Claude run → branch → PR loop. Acceptance is imp
 ## Risks
 - None of substance. The marker file is documentation-only and isolated under
   `docs/smoke/`. No build, runtime, or workflow surface is affected.
+
+## Continuation 2026-05-09
+- Branch `tdf/kan-7` already carries `docs/smoke/KAN-7.md`, `plan.md`, and
+  `response.md` from the prior run (commit `d756f89`).
+- Spec snapshot refreshed by the workflow: ticket moved from `To Do` to
+  `In Progress` (the PR opened by the prior run is the trigger). No new
+  comments, no scope change.
+- Conclusion: nothing left to implement. The dispatch loop has demonstrably
+  produced a real diff, a branch, and a PR — which is exactly what this
+  smoke ticket asks for.

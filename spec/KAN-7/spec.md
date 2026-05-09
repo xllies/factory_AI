@@ -1,6 +1,6 @@
 # KAN-7: Smoke: dispatch validation
 
-Generated from Jira on 2026-05-09T09:34:57.562Z.
+Generated from Jira on 2026-05-09T09:40:14.574Z.
 
 ## Issue Details
 
@@ -9,14 +9,14 @@ Generated from Jira on 2026-05-09T09:34:57.562Z.
 | Key | KAN-7 |
 | Title | Smoke: dispatch validation |
 | Type | Task |
-| Status | To Do |
+| Status | In Progress |
 | Priority | Medium |
 | Assignee | - |
 | Reporter | Roland Abou Younes |
 | Labels | dark-factory-smoke |
 | Components | - |
 | Created | 2026-05-09T11:27:55.887+0300 |
-| Updated | 2026-05-09T11:27:56.357+0300 |
+| Updated | 2026-05-09T12:34:56.708+0300 |
 
 ## Description
 
