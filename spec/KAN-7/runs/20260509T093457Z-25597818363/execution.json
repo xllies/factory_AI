@@ -1,0 +1,1217 @@
+[
+  {
+    "type": "system",
+    "subtype": "init",
+    "cwd": "/home/runner/work/dark_factory/dark_factory",
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "tools": [
+      "Task",
+      "AskUserQuestion",
+      "Bash",
+      "CronCreate",
+      "CronDelete",
+      "CronList",
+      "Edit",
+      "EnterPlanMode",
+      "EnterWorktree",
+      "ExitPlanMode",
+      "ExitWorktree",
+      "Monitor",
+      "NotebookEdit",
+      "PushNotification",
+      "Read",
+      "RemoteTrigger",
+      "ScheduleWakeup",
+      "Skill",
+      "TaskOutput",
+      "TaskStop",
+      "TodoWrite",
+      "ToolSearch",
+      "WebFetch",
+      "WebSearch",
+      "Write"
+    ],
+    "mcp_servers": [],
+    "model": "claude-opus-4-7",
+    "permissionMode": "bypassPermissions",
+    "slash_commands": [
+      "update-config",
+      "debug",
+      "simplify",
+      "batch",
+      "fewer-permission-prompts",
+      "loop",
+      "claude-api",
+      "clear",
+      "compact",
+      "context",
+      "heapdump",
+      "init",
+      "review",
+      "security-review",
+      "usage",
+      "insights",
+      "team-onboarding"
+    ],
+    "apiKeySource": "none",
+    "claude_code_version": "2.1.138",
+    "output_style": "default",
+    "agents": [
+      "claude-code-guide",
+      "Explore",
+      "general-purpose",
+      "Plan",
+      "statusline-setup"
+    ],
+    "skills": [
+      "update-config",
+      "debug",
+      "simplify",
+      "batch",
+      "fewer-permission-prompts",
+      "loop",
+      "schedule",
+      "claude-api"
+    ],
+    "plugins": [],
+    "analytics_disabled": false,
+    "uuid": "e084736e-3aa8-4dcb-92ff-918c00393dc5",
+    "memory_paths": {
+      "auto": "/home/runner/.claude/projects/-home-runner-work-dark-factory-dark-factory/memory/"
+    },
+    "fast_mode_state": "off"
+  },
+  {
+    "type": "rate_limit_event",
+    "rate_limit_info": {
+      "status": "allowed",
+      "resetsAt": 1778323200,
+      "rateLimitType": "five_hour",
+      "overageStatus": "allowed",
+      "overageResetsAt": 1778319600,
+      "isUsingOverage": false
+    },
+    "uuid": "cd60186b-29ed-4ce8-8d85-f824c281e861",
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01Wnwc848wBRsDwAGJHbskv1",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "",
+          "signature": "EosCClkIDRgCKkDkdoUPi0D3vDc0CLJAtCkA+ehNzqONl7G8pN28pZAFVkHYF4CD/C9rFUc7Qy4ZsJKaiAyoLlFMmh1A4/YzOSkFMg9jbGF1ZGUtb3B1cy00LTc4ABIMQsow4dZ+ND4Ev+I1GgxDelFpdecGNKDvY7UiMHKUBKJp/a8O27po5pvyAez1ECt+PiWCM5L3TC3EYcBDO267d3opn+MB22DrONQ5Cipg8Hnd0SUbrBN9H3WduoDjBAqCr2oJZokrYboyF4ZmuPII3iCx0WLLyc2ibkBoIIJ1J0125Kpl9Uue0MuF4R70WHY7jgaNhJR45HXuMoVHWH/1K0y9/d+5UgCCqrn0pkw/GAE="
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 5,
+        "cache_creation_input_tokens": 9343,
+        "cache_read_input_tokens": 16550,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 9343
+        },
+        "output_tokens": 0,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "fca9e2dd-6f1b-46c9-8243-7498b95db833"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01Wnwc848wBRsDwAGJHbskv1",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01NkXQkGB8AMPQsJets77AxF",
+          "name": "Read",
+          "input": {
+            "file_path": "/home/runner/work/dark_factory/dark_factory/spec/KAN-7/spec.md"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 5,
+        "cache_creation_input_tokens": 9343,
+        "cache_read_input_tokens": 16550,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 9343
+        },
+        "output_tokens": 0,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "9ce4f6a4-e493-403a-a707-a7be4ed20c89"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01NkXQkGB8AMPQsJets77AxF",
+          "type": "tool_result",
+          "content": "1\t# KAN-7: Smoke: dispatch validation\n2\t\n3\tGenerated from Jira on 2026-05-09T09:34:57.562Z.\n4\t\n5\t## Issue Details\n6\t\n7\t| Field | Value |\n8\t|---|---|\n9\t| Key | KAN-7 |\n10\t| Title | Smoke: dispatch validation |\n11\t| Type | Task |\n12\t| Status | To Do |\n13\t| Priority | Medium |\n14\t| Assignee | - |\n15\t| Reporter | Roland Abou Younes |\n16\t| Labels | dark-factory-smoke |\n17\t| Components | - |\n18\t| Created | 2026-05-09T11:27:55.887+0300 |\n19\t| Updated | 2026-05-09T11:27:56.357+0300 |\n20\t\n21\t## Description\n22\t\n23\tPlaceholder issue to validate the Dark Factory dispatch automation rule. Safe to delete after validation.\n24\t\n25\t## Comments (0)\n26\t\n27\t_No comments._\n28\t"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "88c00751-63a2-47cf-acdc-0ab12220a502",
+    "timestamp": "2026-05-09T09:35:21.927Z",
+    "tool_use_result": {
+      "type": "text",
+      "file": {
+        "filePath": "/home/runner/work/dark_factory/dark_factory/spec/KAN-7/spec.md",
+        "content": "# KAN-7: Smoke: dispatch validation\n\nGenerated from Jira on 2026-05-09T09:34:57.562Z.\n\n## Issue Details\n\n| Field | Value |\n|---|---|\n| Key | KAN-7 |\n| Title | Smoke: dispatch validation |\n| Type | Task |\n| Status | To Do |\n| Priority | Medium |\n| Assignee | - |\n| Reporter | Roland Abou Younes |\n| Labels | dark-factory-smoke |\n| Components | - |\n| Created | 2026-05-09T11:27:55.887+0300 |\n| Updated | 2026-05-09T11:27:56.357+0300 |\n\n## Description\n\nPlaceholder issue to validate the Dark Factory dispatch automation rule. Safe to delete after validation.\n\n## Comments (0)\n\n_No comments._\n",
+        "numLines": 28,
+        "startLine": 1,
+        "totalLines": 28
+      }
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01Wnwc848wBRsDwAGJHbskv1",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_017ncaWfNn2YrkifhkKaRBSV",
+          "name": "Bash",
+          "input": {
+            "command": "ls /home/runner/work/dark_factory/dark_factory/spec/KAN-7/",
+            "description": "List ticket folder contents"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 5,
+        "cache_creation_input_tokens": 9343,
+        "cache_read_input_tokens": 16550,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 9343
+        },
+        "output_tokens": 0,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "8ce34fcb-0a95-45ea-a32f-c71c0500e734"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01Wnwc848wBRsDwAGJHbskv1",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_013syS571forPtRLjKk64DJo",
+          "name": "Bash",
+          "input": {
+            "command": "ls /home/runner/work/dark_factory/dark_factory/",
+            "description": "List repo root"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 5,
+        "cache_creation_input_tokens": 9343,
+        "cache_read_input_tokens": 16550,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 9343
+        },
+        "output_tokens": 0,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "97f9c6c1-6a94-4537-b854-7085d9922c48"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_017ncaWfNn2YrkifhkKaRBSV",
+          "type": "tool_result",
+          "content": "runs\nspec.md\nstate.json\ntranscript.md",
+          "is_error": false
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "1be4d1de-1a36-4a4f-a399-d1c2e753d716",
+    "timestamp": "2026-05-09T09:35:23.417Z",
+    "tool_use_result": {
+      "stdout": "runs\nspec.md\nstate.json\ntranscript.md",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false,
+      "noOutputExpected": false
+    }
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_013syS571forPtRLjKk64DJo",
+          "type": "tool_result",
+          "content": "CLAUDE.md\nREADME.md\narchitecture.md\ndocs\ngithub_actions_claude_spec.md\nspec",
+          "is_error": false
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "a5cad33d-337f-4582-b966-fe74336c7586",
+    "timestamp": "2026-05-09T09:35:23.419Z",
+    "tool_use_result": {
+      "stdout": "CLAUDE.md\nREADME.md\narchitecture.md\ndocs\ngithub_actions_claude_spec.md\nspec",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false,
+      "noOutputExpected": false
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01VKHTXPJRKpvx9wYZgRyaYn",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01DgjNA64qr3bh8uTwNUJY6P",
+          "name": "Read",
+          "input": {
+            "file_path": "/home/runner/work/dark_factory/dark_factory/spec/KAN-7/state.json"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 814,
+        "cache_read_input_tokens": 25893,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 814
+        },
+        "output_tokens": 66,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "e0b5a7d8-70b6-4b27-9c47-fbf0213a725f"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01DgjNA64qr3bh8uTwNUJY6P",
+          "type": "tool_result",
+          "content": "1\t{\n2\t  \"ticket_id\": \"KAN-7\",\n3\t  \"run_count\": 0,\n4\t  \"kind\": \"pr\",\n5\t  \"branch\": \"tdf/kan-7\"\n6\t}\n7\t"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "3c84643b-838b-4426-b23b-6600e80b598a",
+    "timestamp": "2026-05-09T09:35:26.052Z",
+    "tool_use_result": {
+      "type": "text",
+      "file": {
+        "filePath": "/home/runner/work/dark_factory/dark_factory/spec/KAN-7/state.json",
+        "content": "{\n  \"ticket_id\": \"KAN-7\",\n  \"run_count\": 0,\n  \"kind\": \"pr\",\n  \"branch\": \"tdf/kan-7\"\n}\n",
+        "numLines": 7,
+        "startLine": 1,
+        "totalLines": 7
+      }
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01VKHTXPJRKpvx9wYZgRyaYn",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01LFXZob1WL8McEa5QYfkUu3",
+          "name": "Read",
+          "input": {
+            "file_path": "/home/runner/work/dark_factory/dark_factory/spec/KAN-7/transcript.md"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 814,
+        "cache_read_input_tokens": 25893,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 814
+        },
+        "output_tokens": 66,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "8a1a23c5-6650-45cf-af92-89c0badb568c"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01LFXZob1WL8McEa5QYfkUu3",
+          "type": "tool_result",
+          "content": "1\t# KAN-7 Transcript\n2\t"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "113557f2-9901-4a93-a1ba-ea52459f68ec",
+    "timestamp": "2026-05-09T09:35:26.207Z",
+    "tool_use_result": {
+      "type": "text",
+      "file": {
+        "filePath": "/home/runner/work/dark_factory/dark_factory/spec/KAN-7/transcript.md",
+        "content": "# KAN-7 Transcript\n",
+        "numLines": 2,
+        "startLine": 1,
+        "totalLines": 2
+      }
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01VKHTXPJRKpvx9wYZgRyaYn",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01GbfphXVVtSa1AKTbjsYk7P",
+          "name": "Read",
+          "input": {
+            "file_path": "/home/runner/work/dark_factory/dark_factory/README.md"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 814,
+        "cache_read_input_tokens": 25893,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 814
+        },
+        "output_tokens": 66,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "ac49d61f-f03b-4c78-8438-b22ab7e4e886"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01GbfphXVVtSa1AKTbjsYk7P",
+          "type": "tool_result",
+          "content": "1\t# dark_factory\n2\t\n3\t> Dark Factory — orchestrator scaffolding under the `cursor-hack` org.\n4\t\n5\t## Status\n6\t\n7\tEmpty scaffold. No code yet.\n8\t\n9\t## Layout\n10\t\n11\t```\n12\tdark_factory/\n13\t├── .gitignore\n14\t└── README.md\n15\t```\n16\t\n17\t## Getting started\n18\t\n19\t```bash\n20\tgit clone git@github.com:cursor-hack/dark_factory.git\n21\tcd dark_factory\n22\t```\n23\t\n24\t## License\n25\t\n26\tNot yet decided.\n27\t"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "e3b7b95e-50c5-4812-b8cf-440408b600b0",
+    "timestamp": "2026-05-09T09:35:26.538Z",
+    "tool_use_result": {
+      "type": "text",
+      "file": {
+        "filePath": "/home/runner/work/dark_factory/dark_factory/README.md",
+        "content": "# dark_factory\n\n> Dark Factory — orchestrator scaffolding under the `cursor-hack` org.\n\n## Status\n\nEmpty scaffold. No code yet.\n\n## Layout\n\n```\ndark_factory/\n├── .gitignore\n└── README.md\n```\n\n## Getting started\n\n```bash\ngit clone git@github.com:cursor-hack/dark_factory.git\ncd dark_factory\n```\n\n## License\n\nNot yet decided.\n",
+        "numLines": 27,
+        "startLine": 1,
+        "totalLines": 27
+      }
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01PU8fLTox5ixMSCbfGNqoR5",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "",
+          "signature": "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"
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 615,
+        "cache_read_input_tokens": 26707,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 615
+        },
+        "output_tokens": 50,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "a9b7f1c4-3ee7-4bce-bc9b-a0b370201ee8"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01PU8fLTox5ixMSCbfGNqoR5",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_0144cYJenWjbe9GKsvHzdRDa",
+          "name": "Bash",
+          "input": {
+            "command": "ls /home/runner/work/dark_factory/dark_factory/docs/ 2>/dev/null && echo \"---\" && ls /home/runner/work/dark_factory/dark_factory/spec/",
+            "description": "Check docs and spec folder contents"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 615,
+        "cache_read_input_tokens": 26707,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 615
+        },
+        "output_tokens": 50,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "6f546212-d2fe-49c9-8c7e-a9dfcda8c9e2"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_0144cYJenWjbe9GKsvHzdRDa",
+          "type": "tool_result",
+          "content": "workflows.md\n---\nKAN-7",
+          "is_error": false
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "c2d03e5b-70d3-40fe-95e0-f81983be09f9",
+    "timestamp": "2026-05-09T09:35:37.455Z",
+    "tool_use_result": {
+      "stdout": "workflows.md\n---\nKAN-7",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false,
+      "noOutputExpected": false
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01PU8fLTox5ixMSCbfGNqoR5",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01H7n5dRjwoUrhy1Yn2qDHGQ",
+          "name": "Bash",
+          "input": {
+            "command": "git -C /home/runner/work/dark_factory/dark_factory log --oneline -20 && echo \"---\" && git -C /home/runner/work/dark_factory/dark_factory branch --show-current",
+            "description": "Show git log and current branch"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 615,
+        "cache_read_input_tokens": 26707,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 615
+        },
+        "output_tokens": 50,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "24fdbd46-fe58-407d-ad44-2aaa5079995a"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01H7n5dRjwoUrhy1Yn2qDHGQ",
+          "type": "tool_result",
+          "content": "fff63c6 remove debug logs\n0ba3c02 debug: log baseUrl shape (TEMP)\n49aabb4 fix: use built-in GITHUB_TOKEN instead of GH_PR_TOKEN\nd8b8430 Bootstrap orchestrator from dark-factory-installer templates\na6f4183 chore: initial scaffold\nbcaf188 Initial commit\n---\nmain",
+          "is_error": false
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "2764bf97-d16e-423d-8a0a-0ba2f15d3422",
+    "timestamp": "2026-05-09T09:35:38.542Z",
+    "tool_use_result": {
+      "stdout": "fff63c6 remove debug logs\n0ba3c02 debug: log baseUrl shape (TEMP)\n49aabb4 fix: use built-in GITHUB_TOKEN instead of GH_PR_TOKEN\nd8b8430 Bootstrap orchestrator from dark-factory-installer templates\na6f4183 chore: initial scaffold\nbcaf188 Initial commit\n---\nmain",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false,
+      "noOutputExpected": false
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01V6pAxgP6o6UCHry81BMSkN",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "",
+          "signature": "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"
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 1159,
+        "cache_read_input_tokens": 27322,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1159
+        },
+        "output_tokens": 57,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "9004e6d6-11a4-41c6-b2ff-0bab1268a206"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01V6pAxgP6o6UCHry81BMSkN",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "This is a smoke test ticket to validate the dispatch flow. The minimal correct change is a small, clearly-labelled smoke marker that proves the dispatch produced real repo work."
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 1159,
+        "cache_read_input_tokens": 27322,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1159
+        },
+        "output_tokens": 57,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "60f32dfb-4b08-4c25-a743-cb9addc93eea"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01V6pAxgP6o6UCHry81BMSkN",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01RiAur4oQgrLkz3fQ6X36En",
+          "name": "Read",
+          "input": {
+            "file_path": "/home/runner/work/dark_factory/dark_factory/docs/workflows.md"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 1159,
+        "cache_read_input_tokens": 27322,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1159
+        },
+        "output_tokens": 57,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "4060fd81-2857-4ab5-90a2-314aa1d2a7ec"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01RiAur4oQgrLkz3fQ6X36En",
+          "type": "tool_result",
+          "content": "1\t# Workflows Overview\n2\t\n3\tA very high level view of how Jira tickets become repository changes in The Dark Factory.\n4\t\n5\tThe source of truth for behaviour is always the workflow files themselves under\n6\t[`.github/workflows/`](../.github/workflows). For a deeper spec of the dispatch\n7\tflow and Claude session continuity, see\n8\t[`../github_actions_claude_spec.md`](../github_actions_claude_spec.md).\n9\t\n10\t## Workflows in this repo\n11\t\n12\t| Workflow | Trigger | Purpose |\n13\t|---|---|---|\n14\t| [`jira-dispatch.yml`](../.github/workflows/jira-dispatch.yml) | `repository_dispatch: jira_manual_button` from Jira automation, or manual `workflow_dispatch` | Turn a Jira ticket into reviewable repo work or a Jira-facing answer. Resumes Claude across runs. |\n15\t| [`jira-pr-merged.yml`](../.github/workflows/jira-pr-merged.yml) | `pull_request: closed` on `tdf/<key>` branches | When a dispatch-flow PR is merged, transition the Jira ticket to Done and delete the head branch. |\n16\t| [`poc-session.yml`](../.github/workflows/poc-session.yml) | Manual `workflow_dispatch` | Proof-of-concept that Claude Code sessions can be resumed across runner invocations. |\n17\t\n18\t## High level system view\n19\t\n20\tThree-lane swimlane: **Triggers → Workflows → Side effects**. Trigger metadata\n21\t(`repository_dispatch`, `pull_request`, `workflow_dispatch`) is encoded in the\n22\ttrigger nodes so all arrows stay unlabelled. `actions/cache` is intentionally\n23\tomitted from this view — it is an implementation detail of session continuity\n24\tand is captured in the workflow comparison table above.\n25\t\n26\t```mermaid\n27\tflowchart LR\n28\t    subgraph TR[\"Triggers\"]\n29\t        direction TB\n30\t        JM[\"Jira: manual button<br/>(repository_dispatch)\"]\n31\t        PRM[\"PR merged on tdf/*<br/>(pull_request: closed)\"]\n32\t        MD[\"Manual workflow_dispatch\"]\n33\t    end\n34\t\n35\t    subgraph WF[\"Workflows (.github/workflows)\"]\n36\t        direction TB\n37\t        WD[\"jira-dispatch.yml\"]:::pref\n38\t        WM[\"jira-pr-merged.yml\"]:::pref\n39\t        WP[\"poc-session.yml<br/>(POC)\"]:::poc\n40\t    end\n41\t\n42\t    subgraph OUT[\"Side effects\"]\n43\t        direction TB\n44\t        CC[\"Claude Code run\"]\n45\t        GH[\"Branch + PR\"]\n46\t        JC[\"Jira comment / transition\"]\n47\t    end\n48\t\n49\t    JM --> WD\n50\t    PRM --> WM\n51\t    MD --> WP\n52\t    MD --> WD\n53\t\n54\t    WD --> CC\n55\t    WP --> CC\n56\t\n57\t    WD --> GH\n58\t    WM --> GH\n59\t    WP --> GH\n60\t\n61\t    WD --> JC\n62\t    WM --> JC\n63\t\n64\t    classDef pref fill:#d1f0d8,stroke:#28a745,color:#1f2328\n65\t    classDef poc fill:#e7e9ec,stroke:#868e96,color:#1f2328\n66\t```\n67\t\n68\t## Common shape of a Jira-driven run\n69\t\n70\t`jira-dispatch.yml` is the workflow that drives a ticket end-to-end.\n71\tSession-cache restore/save wraps the Claude step so progress survives\n72\tacross runner invocations.\n73\t\n74\t```mermaid\n75\tsequenceDiagram\n76\t    autonumber\n77\t    participant J as Jira\n78\t    participant W as GitHub Actions workflow\n79\t    participant C as Claude Code\n80\t    participant R as Repo / PR\n81\t\n82\t    J->>W: trigger (manual button)\n83\t    W->>J: fetch ticket (REST)\n84\t    W->>W: prepare spec/[TICKET-ID]/ artefacts\n85\t    Note over W: restore ~/.claude/projects from cache\n86\t    W->>C: run with prompt + ticket context\n87\t    C->>W: edits, plan.md, response.md\n88\t    Note over W: save ~/.claude/projects to cache\n89\t    W->>R: commit, push branch, open or update PR\n90\t    W->>J: comment back with PR link or answer\n91\t```\n92\t\n93\t## Artefacts each run produces\n94\t\n95\t```\n96\tspec/[TICKET-ID]/\n97\t  spec.md          ticket snapshot (refreshed each run)\n98\t  plan.md          implementation plan owned by Claude\n99\t  response.md      Jira-facing summary or answer\n100\t  state.json       last_session_id, run_count, kind\n101\t  transcript.md    one section per run\n102\t  runs/[ts]-[id]/  per-run prompt and response copies\n103\t```\n104\t"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "6d1e82f5-e602-4dff-b11f-953a50b1940d",
+    "timestamp": "2026-05-09T09:35:47.923Z",
+    "tool_use_result": {
+      "type": "text",
+      "file": {
+        "filePath": "/home/runner/work/dark_factory/dark_factory/docs/workflows.md",
+        "content": "# Workflows Overview\n\nA very high level view of how Jira tickets become repository changes in The Dark Factory.\n\nThe source of truth for behaviour is always the workflow files themselves under\n[`.github/workflows/`](../.github/workflows). For a deeper spec of the dispatch\nflow and Claude session continuity, see\n[`../github_actions_claude_spec.md`](../github_actions_claude_spec.md).\n\n## Workflows in this repo\n\n| Workflow | Trigger | Purpose |\n|---|---|---|\n| [`jira-dispatch.yml`](../.github/workflows/jira-dispatch.yml) | `repository_dispatch: jira_manual_button` from Jira automation, or manual `workflow_dispatch` | Turn a Jira ticket into reviewable repo work or a Jira-facing answer. Resumes Claude across runs. |\n| [`jira-pr-merged.yml`](../.github/workflows/jira-pr-merged.yml) | `pull_request: closed` on `tdf/<key>` branches | When a dispatch-flow PR is merged, transition the Jira ticket to Done and delete the head branch. |\n| [`poc-session.yml`](../.github/workflows/poc-session.yml) | Manual `workflow_dispatch` | Proof-of-concept that Claude Code sessions can be resumed across runner invocations. |\n\n## High level system view\n\nThree-lane swimlane: **Triggers → Workflows → Side effects**. Trigger metadata\n(`repository_dispatch`, `pull_request`, `workflow_dispatch`) is encoded in the\ntrigger nodes so all arrows stay unlabelled. `actions/cache` is intentionally\nomitted from this view — it is an implementation detail of session continuity\nand is captured in the workflow comparison table above.\n\n```mermaid\nflowchart LR\n    subgraph TR[\"Triggers\"]\n        direction TB\n        JM[\"Jira: manual button<br/>(repository_dispatch)\"]\n        PRM[\"PR merged on tdf/*<br/>(pull_request: closed)\"]\n        MD[\"Manual workflow_dispatch\"]\n    end\n\n    subgraph WF[\"Workflows (.github/workflows)\"]\n        direction TB\n        WD[\"jira-dispatch.yml\"]:::pref\n        WM[\"jira-pr-merged.yml\"]:::pref\n        WP[\"poc-session.yml<br/>(POC)\"]:::poc\n    end\n\n    subgraph OUT[\"Side effects\"]\n        direction TB\n        CC[\"Claude Code run\"]\n        GH[\"Branch + PR\"]\n        JC[\"Jira comment / transition\"]\n    end\n\n    JM --> WD\n    PRM --> WM\n    MD --> WP\n    MD --> WD\n\n    WD --> CC\n    WP --> CC\n\n    WD --> GH\n    WM --> GH\n    WP --> GH\n\n    WD --> JC\n    WM --> JC\n\n    classDef pref fill:#d1f0d8,stroke:#28a745,color:#1f2328\n    classDef poc fill:#e7e9ec,stroke:#868e96,color:#1f2328\n```\n\n## Common shape of a Jira-driven run\n\n`jira-dispatch.yml` is the workflow that drives a ticket end-to-end.\nSession-cache restore/save wraps the Claude step so progress survives\nacross runner invocations.\n\n```mermaid\nsequenceDiagram\n    autonumber\n    participant J as Jira\n    participant W as GitHub Actions workflow\n    participant C as Claude Code\n    participant R as Repo / PR\n\n    J->>W: trigger (manual button)\n    W->>J: fetch ticket (REST)\n    W->>W: prepare spec/[TICKET-ID]/ artefacts\n    Note over W: restore ~/.claude/projects from cache\n    W->>C: run with prompt + ticket context\n    C->>W: edits, plan.md, response.md\n    Note over W: save ~/.claude/projects to cache\n    W->>R: commit, push branch, open or update PR\n    W->>J: comment back with PR link or answer\n```\n\n## Artefacts each run produces\n\n```\nspec/[TICKET-ID]/\n  spec.md          ticket snapshot (refreshed each run)\n  plan.md          implementation plan owned by Claude\n  response.md      Jira-facing summary or answer\n  state.json       last_session_id, run_count, kind\n  transcript.md    one section per run\n  runs/[ts]-[id]/  per-run prompt and response copies\n```\n",
+        "numLines": 104,
+        "startLine": 1,
+        "totalLines": 104
+      }
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01GafbzMpcpvA11XpiXamC2t",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "",
+          "signature": "EugCClkIDRgCKkBo4Wwaa77R5q0Y3COR9uGxmLRZKj5NaeiZLMRSpQvtF+sIsO/Qi0l1rz1fB/BqHZGSMZmmBq9NW9mBn0WlxEpzMg9jbGF1ZGUtb3B1cy00LTc4ABIMuqjJu67fcy75sb02Ggyz7y5f9zjV8EN+1d0iMErXtgLa/ESPvI7Xzvx/pPP5L9EOXNIfsgumtfH79GhZdhTUNRbbNHUa4T2vl8KsTSq8ATqp2uEJtWOUIXNn36b/jI8O+TELphVg+efrCKmy2dGmmbLkRjfIsMLLNGI5j0c7+lArX5+zNQ+QZhtJShqP3uJR0I/DjAW/O86HCi5OD5B2rCWe9UFDTIfonK0RopO5rPdVmXYYO0Z49bFvcrc/kxF6QnJ9mfTOwFAQMBmkHM6FWq6ZvkpTQvlaYHW9brUJPC2LnyhB1DzVnOupf5YOnMNuJuaaZvg6ZeuS9/+R3lo7oIZTAYHgH2Jcezm1GAE="
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 2569,
+        "cache_read_input_tokens": 28481,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 2569
+        },
+        "output_tokens": 40,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "4bc95f27-57df-47ea-98f8-0ca275c309c3"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01GafbzMpcpvA11XpiXamC2t",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "I'll make a minimal smoke marker file, update the plan, and write the response."
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 2569,
+        "cache_read_input_tokens": 28481,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 2569
+        },
+        "output_tokens": 40,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "60bddeb0-152e-452c-a995-b104ffc0f606"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01GafbzMpcpvA11XpiXamC2t",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_017uhk9hQn85zi8Ysk8RxuF3",
+          "name": "Write",
+          "input": {
+            "file_path": "/home/runner/work/dark_factory/dark_factory/docs/smoke/KAN-7.md",
+            "content": "# KAN-7 dispatch smoke marker\n\nThis file was produced by the Dark Factory dispatch flow for ticket\n[`KAN-7`](https://) on 2026-05-09. Its sole purpose is to prove that a\nJira manual-button trigger can produce a real repository change end-to-end:\nticket fetch → Claude run → branch → PR.\n\nSafe to delete once dispatch validation is complete.\n"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 2569,
+        "cache_read_input_tokens": 28481,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 2569
+        },
+        "output_tokens": 40,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "f7dc311e-76f4-44c4-a816-9a8f155993e2"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_017uhk9hQn85zi8Ysk8RxuF3",
+          "type": "tool_result",
+          "content": "File created successfully at: /home/runner/work/dark_factory/dark_factory/docs/smoke/KAN-7.md (file state is current in your context — no need to Read it back)"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "9e236289-78a2-4ee9-88c3-61ed7f70e390",
+    "timestamp": "2026-05-09T09:35:54.817Z",
+    "tool_use_result": {
+      "type": "create",
+      "filePath": "/home/runner/work/dark_factory/dark_factory/docs/smoke/KAN-7.md",
+      "content": "# KAN-7 dispatch smoke marker\n\nThis file was produced by the Dark Factory dispatch flow for ticket\n[`KAN-7`](https://) on 2026-05-09. Its sole purpose is to prove that a\nJira manual-button trigger can produce a real repository change end-to-end:\nticket fetch → Claude run → branch → PR.\n\nSafe to delete once dispatch validation is complete.\n",
+      "structuredPatch": [],
+      "originalFile": null,
+      "userModified": false
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01GafbzMpcpvA11XpiXamC2t",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_013TY366zieoiYiLwqwgFRvx",
+          "name": "Write",
+          "input": {
+            "file_path": "/home/runner/work/dark_factory/dark_factory/spec/KAN-7/plan.md",
+            "content": "# KAN-7 Implementation Plan\n\n## Ticket\nSmoke: dispatch validation. Placeholder issue to validate the Dark Factory\ndispatch automation rule end-to-end.\n\n## Goal\nProduce the smallest correct repository change that proves the dispatch flow\ncan drive a Jira ticket → Claude run → branch → PR loop. Acceptance is implicit\n(workflow opens a PR successfully and Jira receives a response).\n\n## Approach\n1. Add a single, clearly-disposable smoke marker file under\n   `docs/smoke/KAN-7.md`. This avoids touching production-relevant files\n   (workflows, README, root) while still producing a real diff outside the\n   ticket folder, which `KIND=pr` requires.\n2. Update `spec/KAN-7/plan.md` (this file) with the chosen approach.\n3. Write a short Jira-facing summary to `spec/KAN-7/response.md`.\n\n## Out of scope\n- Editing workflows, README, or any existing source.\n- Branch / PR / Jira mechanics — handled by `.github/workflows/jira-dispatch.yml`.\n- Cleanup of the smoke marker — the ticket itself notes it is safe to delete\n  after validation; a follow-up ticket can remove `docs/smoke/KAN-7.md`.\n\n## Risks\n- None of substance. The marker file is documentation-only and isolated under\n  `docs/smoke/`. No build, runtime, or workflow surface is affected.\n"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 2569,
+        "cache_read_input_tokens": 28481,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 2569
+        },
+        "output_tokens": 40,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "851c73f0-a8e4-41c0-911a-c1265717ea20"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_013TY366zieoiYiLwqwgFRvx",
+          "type": "tool_result",
+          "content": "File created successfully at: /home/runner/work/dark_factory/dark_factory/spec/KAN-7/plan.md (file state is current in your context — no need to Read it back)"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "e9d5c982-283b-4c94-9359-d0f5f266deff",
+    "timestamp": "2026-05-09T09:36:03.011Z",
+    "tool_use_result": {
+      "type": "create",
+      "filePath": "/home/runner/work/dark_factory/dark_factory/spec/KAN-7/plan.md",
+      "content": "# KAN-7 Implementation Plan\n\n## Ticket\nSmoke: dispatch validation. Placeholder issue to validate the Dark Factory\ndispatch automation rule end-to-end.\n\n## Goal\nProduce the smallest correct repository change that proves the dispatch flow\ncan drive a Jira ticket → Claude run → branch → PR loop. Acceptance is implicit\n(workflow opens a PR successfully and Jira receives a response).\n\n## Approach\n1. Add a single, clearly-disposable smoke marker file under\n   `docs/smoke/KAN-7.md`. This avoids touching production-relevant files\n   (workflows, README, root) while still producing a real diff outside the\n   ticket folder, which `KIND=pr` requires.\n2. Update `spec/KAN-7/plan.md` (this file) with the chosen approach.\n3. Write a short Jira-facing summary to `spec/KAN-7/response.md`.\n\n## Out of scope\n- Editing workflows, README, or any existing source.\n- Branch / PR / Jira mechanics — handled by `.github/workflows/jira-dispatch.yml`.\n- Cleanup of the smoke marker — the ticket itself notes it is safe to delete\n  after validation; a follow-up ticket can remove `docs/smoke/KAN-7.md`.\n\n## Risks\n- None of substance. The marker file is documentation-only and isolated under\n  `docs/smoke/`. No build, runtime, or workflow surface is affected.\n",
+      "structuredPatch": [],
+      "originalFile": null,
+      "userModified": false
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_01GafbzMpcpvA11XpiXamC2t",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01Ux7RDRV3rrFxt6xRZRhddz",
+          "name": "Write",
+          "input": {
+            "file_path": "/home/runner/work/dark_factory/dark_factory/spec/KAN-7/response.md",
+            "content": "Dispatch smoke validated end-to-end.\n\n**What changed**\n- Added `docs/smoke/KAN-7.md` — a single, clearly-disposable marker file\n  documenting that the Jira manual-button dispatch produced a real repo\n  change for this ticket.\n- Wrote `spec/KAN-7/plan.md` with the chosen approach.\n\n**Why**\nThe ticket is a placeholder to confirm `repository_dispatch:\njira_manual_button` → `jira-dispatch.yml` → Claude → branch → PR works on\nthis repo. A docs-only marker is the smallest change that exercises the\nPR path without touching workflows, README, or any runtime code.\n\n**Risks**\nNone. The change is documentation-only and isolated under `docs/smoke/`.\nThe marker is safe to delete once validation is complete (a follow-up\nticket can remove it together with the Jira issue).\n"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 2569,
+        "cache_read_input_tokens": 28481,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 2569
+        },
+        "output_tokens": 40,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "0331affa-a344-4a77-9d43-7f8318f5665b"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01Ux7RDRV3rrFxt6xRZRhddz",
+          "type": "tool_result",
+          "content": "File created successfully at: /home/runner/work/dark_factory/dark_factory/spec/KAN-7/response.md (file state is current in your context — no need to Read it back)"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "fd79af0f-9262-4517-87f8-394173866037",
+    "timestamp": "2026-05-09T09:36:07.181Z",
+    "tool_use_result": {
+      "type": "create",
+      "filePath": "/home/runner/work/dark_factory/dark_factory/spec/KAN-7/response.md",
+      "content": "Dispatch smoke validated end-to-end.\n\n**What changed**\n- Added `docs/smoke/KAN-7.md` — a single, clearly-disposable marker file\n  documenting that the Jira manual-button dispatch produced a real repo\n  change for this ticket.\n- Wrote `spec/KAN-7/plan.md` with the chosen approach.\n\n**Why**\nThe ticket is a placeholder to confirm `repository_dispatch:\njira_manual_button` → `jira-dispatch.yml` → Claude → branch → PR works on\nthis repo. A docs-only marker is the smallest change that exercises the\nPR path without touching workflows, README, or any runtime code.\n\n**Risks**\nNone. The change is documentation-only and isolated under `docs/smoke/`.\nThe marker is safe to delete once validation is complete (a follow-up\nticket can remove it together with the Jira issue).\n",
+      "structuredPatch": [],
+      "originalFile": null,
+      "userModified": false
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-4-7",
+      "id": "msg_012ZuUekLzo2tvvA2x9YSDKA",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Smoke validation done. Added `docs/smoke/KAN-7.md` as a minimal, disposable marker, plus `plan.md` and `response.md` under `spec/KAN-7/`. Branch, PR, and Jira comment are left to the workflow."
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 1,
+        "cache_creation_input_tokens": 1604,
+        "cache_read_input_tokens": 31050,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1604
+        },
+        "output_tokens": 2,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "uuid": "39ede8ab-ef2c-48e6-bfc7-c8d43fbde48c"
+  },
+  {
+    "type": "result",
+    "subtype": "success",
+    "is_error": false,
+    "api_error_status": null,
+    "duration_ms": 57254,
+    "duration_api_ms": 57717,
+    "num_turns": 13,
+    "result": "Smoke validation done. Added `docs/smoke/KAN-7.md` as a minimal, disposable marker, plus `plan.md` and `response.md` under `spec/KAN-7/`. Branch, PR, and Jira comment are left to the workflow.",
+    "stop_reason": "end_turn",
+    "session_id": "839323c9-1237-42d4-ac96-c053286bc63c",
+    "total_cost_usd": 0.2700325,
+    "usage": {
+      "input_tokens": 10,
+      "cache_creation_input_tokens": 16104,
+      "cache_read_input_tokens": 156003,
+      "output_tokens": 3624,
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 16104,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "",
+      "iterations": [
+        {
+          "input_tokens": 1,
+          "output_tokens": 90,
+          "cache_read_input_tokens": 31050,
+          "cache_creation_input_tokens": 1604,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1604
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard"
+    },
+    "modelUsage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 661,
+        "outputTokens": 14,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.000731,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000
+      },
+      "claude-opus-4-7": {
+        "inputTokens": 10,
+        "outputTokens": 3624,
+        "cacheReadInputTokens": 156003,
+        "cacheCreationInputTokens": 16104,
+        "webSearchRequests": 0,
+        "costUSD": 0.2693015,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000
+      }
+    },
+    "permission_denials": [],
+    "terminal_reason": "completed",
+    "fast_mode_state": "off",
+    "uuid": "92fae162-0e6e-42d2-807f-0e1a4ef3df48"
+  }
+]
