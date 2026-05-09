@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import type { ShoppingCandidate, ShoppingIntent, ShoppingMemory, ShoppingProfile } from "@/lib/types";
 import { parseShoppingIntent, detectShoppingIntent } from "@/lib/shopping-intent";
@@ -23,6 +23,14 @@ const RETAILER_LABELS: Record<string, string> = {
 };
 
 export default function ShoppingPage() {
+  return (
+    <Suspense fallback={<main style={{ maxWidth: 720, margin: "0 auto", padding: "1.5rem 1rem" }}><p>Loading…</p></main>}>
+      <ShoppingPageInner />
+    </Suspense>
+  );
+}
+
+function ShoppingPageInner() {
   const searchParams = useSearchParams();
   const [tab, setTab] = useState<Tab>("search");
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
