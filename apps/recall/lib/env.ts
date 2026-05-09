@@ -13,6 +13,8 @@ const schema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z.string().url().optional(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1).optional(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1).optional(),
+  /** Public URL of the app (no trailing slash). Fixes calendar feed links when `Host` / reverse-proxy URL ≠ the URL pasted into Google Calendar. */
+  APP_BASE_URL: z.string().url().optional(),
 });
 
 export const env = schema.parse({
@@ -21,4 +23,5 @@ export const env = schema.parse({
   NEXT_PUBLIC_SUPABASE_URL: empty(process.env.NEXT_PUBLIC_SUPABASE_URL),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: empty(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
   SUPABASE_SERVICE_ROLE_KEY: empty(process.env.SUPABASE_SERVICE_ROLE_KEY),
+  APP_BASE_URL: empty(process.env.APP_BASE_URL),
 });
